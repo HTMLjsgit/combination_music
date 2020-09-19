@@ -48,17 +48,17 @@
 		});
 	</script>
 <% else %>
-	<div class="form-box new-form">
 		<div class="post-form-errors-new">
-
 		</div>
-		<p><input type="file" id="audio-file_field" class="file-choose-button"></p>
+	<div class="form-box new-form nologin-form">
+
+		<input type="file" id="audio-file_field" class="file-choose-button">
 		<span id="file_button" class="file-button-demo">ファイルを選択</span><br>
 		<p id="file_name"></p>
 		<p><input type="submit" value="送信" class="post-submit"></p>
-		<div class="audio-form-show-box">
-			<div class="audio-form-box"></div>
-		</div>
+	</div>
+	<div class="audio-form-show-box">
+		<div class="audio-form-box"></div>
 	</div>
 	<div class="border-bottom"></div>
 	<div class="range-box-volume-whole">
@@ -76,7 +76,6 @@
 	</div>
 
 	<script>
-		var target_result;
 		$('#pause-audios-button').click(function(){
 			var audios = $get_class("audios");
 			for(var i = 0; i < audios.length; i++){
@@ -105,24 +104,42 @@
 				var file_name_please = file.files[i].name;
 			}
 			file_name.textContent = file_name_please;
-				var render = new FileReader();
-				render.onload = function(e){
-					file_name_tasikame.forEach(function(value){
-						if(file_name_please.replace(/.+\./g, "").match(value)){
-							$("#audio-form-show").attr("src", e.target.result);
-							$('.audio-form-box').html(`<div class='audio-form-box'><audio src='${e.target.result}' controls></audio></div>`);
-							$('.post-submit').click(function(){
-								id_score++;
+			render = new FileReader();
+			render.onload = function(e){
+				file_name_tasikame.forEach(function(value){
+					if(file_name_please.replace(/.+\./g, "").match(value)){
+						$("#audio-form-show").attr("src", e.target.result);
+						$('.audio-form-box').html(`<div class='audio-form-box'><audio src='${e.target.result}' controls></audio></div>`);
+					}
+				});
+				result = e.target.result;
+			}
+			render.readAsDataURL(event.target.files[0])		
+		});
+		$('.post-submit').click(function(){
+			if(result != ''){
+				id_score++;
+				$('.posts-box').append(`<div class='audios-box'><button onclick=audio_play(${id_score}) class='button-audios' id='button-audio-${id_score}'>PlAY</button><audio class='audios' id='audio-${id_score}' src='${result}'></audio></div>`);
+				$get_id("audio-file_field").value = '';
+				$get_id("file_name").textContent = '';
+				$('.audio-form-box').html('');
+				result = '';
+			}
 
-								$('.posts-box').append(`<div class='audios-box'><button onclick=audio_play(${id_score}) class='button-audios' id='button-audio-${id_score}'>PlAY</button><audio class='audios' id='audio-${id_score}' src='${e.target.result}'></audio></div>`);
-							});
-						}
-					});
-				}
-				render.readAsDataURL(event.target.files[0])		
 		});
 		function audio_play(e){
 			$get_id(`audio-${e}`).play();
 		}
 	</script>
+	<style>
+		.audio-form-show-box{
+			display: flex;
+			justify-content: center;
+			text-align: center;
+		}
+		#file_name{
+			margin-left: 10px;
+			margin-right: 10px;
+		}
+	</style>
 <% end %>

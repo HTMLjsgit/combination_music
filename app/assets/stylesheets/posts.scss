@@ -16,6 +16,7 @@ p .post-title-form{
 	width: 100%;
 	max-width: 100%;
 }
+
 .new-form{
 	margin: 20px;
 	display: flex;
@@ -339,9 +340,13 @@ button:hover{
 .kinds-edit-buttons-box button{
 	margin-right: 20px;
 }
+#file_button{
+	margin-right: 30px;
+}
 .file-choose-button{
 	visibility: hidden;
 	height: 0;
+	width: 0;
 }
 .file-button-demo{
 	border: 1px solid #000000;
