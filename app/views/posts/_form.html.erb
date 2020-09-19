@@ -1,0 +1,56 @@
+<% if user_signed_in? %>
+	<div class="form-box new-form">
+		<%= form_with model: @post, local: false do |f| %>
+			<div class="post-form-errors-new">
+				<%= render partial: 'layouts/error', locals: {model: @post} %>
+			</div>
+				<br>
+				<p>
+					<%= f.text_field :title, placeholder: "曲名を入力", class: "title-form" %>
+				</p>
+			<div class="center-flex-box">
+				<p class="sound-mode">
+					<%= f.label "サウンドモードをON", class: "sound-label" %>
+					<%= f.check_box :sound, checked: false, class: "sound-check-label" %><br>
+				</p>
+			</div>
+			<span id="file_button" class="file-button-demo">ファイルを選択</span><br>
+			<p id="file_name"></p>
+			<div class="audio-form-show-box">
+				<div class="audio-form-box"></div>
+			</div>
+			<p><%= f.file_field :audio, id: "audio-file_field", class: "file-choose-button" %></p>
+
+			<div class="center-flex-box">
+				<p><%= f.submit "送信する", class: "post-submit" %></p>
+			</div>
+		<% end %>
+	</div>
+<% end %>
+<script>
+	$('#file_button').click(function(){
+		$('#audio-file_field').click();
+	});
+	file_name_tasikame = ["asf" , "asx" , "acd" ,"au" , "avi" , "aif" , "dig" , "iff" , "lso" , "mid" , "midi" , "mov" , "mp3" , "mpg" , "msf" ,"qt" ,"ram" ,"rm" ,"rpm" ,"sd" ,"sdn" ,"svx" ,"vqe" ,"vqf", "vql", "wav", "wma", "wrk"]
+	var file = $get_id("audio-file_field");
+	var file_name = $get_id("file_name");
+	file.addEventListener('change', (event) => {
+		for(i = 0; i < file.files.length; i++){
+			var file_name_please = file.files[i].name;
+		}
+		file_name.textContent = file_name_please;
+			var render = new FileReader();
+
+			render.onload = function(e){
+				file_name_tasikame.forEach(function(value){
+					if(file_name_please.replace(/.+\./g, "").match(value)){
+						$("#audio-form-show").attr("src", e.target.result);
+						$('.audio-form-box').html(`<div class='audio-form-box'><audio src='${e.target.result}' controls></audio></div>`);	
+					}
+				});
+			}
+			render.readAsDataURL(event.target.files[0])		
+
+	});
+		
+</script>

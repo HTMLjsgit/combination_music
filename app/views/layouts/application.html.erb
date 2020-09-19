@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CombinationMusic</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'reset', media: 'all' %>
+    <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Noto+Sans+JP', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+  
+  </head>
+
+  <body>
+    <header>
+      <div class="top-box top-box-pc">
+        <div class="contents-box">
+            <%= link_to posts_path do %>
+              <h1 class="toptext combinationmusic-top">CombinationMusic</h1>
+            <% end %>
+          <div class="nav-before-box">
+            <nav class="top-nav">
+              <% if user_signed_in? %>
+                <li>
+                  <h1 class="menu-text"><%= link_to current_user.name, edit_user_registration_path  %></h1>
+                </li>
+                <li>
+                  <h1 class="menu-text"><%= link_to "ログアウト",destroy_user_session_path ,method: :delete %></h1>
+                </li>
+              <% else %>
+                <li>
+                  <h1 class="menu-text"><%= link_to "ログイン", new_user_session_path %></h1>
+                </li>
+                <li>
+                  <h1 class="menu-text"><%= link_to "新規登録", new_user_registration_path %></h1>
+                </li>
+              <% end %>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="top-box-mobile top-box">
+        <div class="mobile-contents-box">
+            <%= link_to posts_path do %>
+              <h1 class="toptext-mobile combinationmusic-top">CombinationMusic</h1>
+            <% end %>
+
+            <nav class="mobile-top-nav">
+              <% if user_signed_in? %>
+                <div class="cp_offcm01">
+                  <input type="checkbox" id="cp_toggle01">
+                  <label for="cp_toggle01" id="home_label">
+                    <span id="home_span"></span>
+                  </label>
+                  <div class="cp_menu">
+                    <ul>
+                      <li><%= link_to "TOP", posts_path %></li>
+                      <li><%= link_to "ログアウト", destroy_user_session_path(current_user.id), method: :delete %></li>
+                    </ul>
+                  </div>
+                </div>
+              <% else %>
+                <div class="cp_offcm01">
+                  <input type="checkbox" id="cp_toggle01">
+                  <label for="cp_toggle01" id="home_label">
+                    <span id="home_span"></span>
+                  </label>
+                  <div class="cp_menu">
+                    <ul>
+                      <li><%= link_to "TOP", posts_path %></li>
+                      <li><%= link_to "ログイン", new_user_session_path %></li>
+                      <li><%= link_to "新規登録",new_user_registration_path %></li>
+                    </ul>
+                  </div>
+                </div>
+              <% end %>
+            </nav>
+        </div>
+      </div>
+    </header>
+    <%= yield %>
+
+  </body>
+</html>

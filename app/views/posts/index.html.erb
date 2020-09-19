@@ -1,0 +1,128 @@
+<% if user_signed_in? %>
+	<%= render 'form' %>
+	<div class="border-bottom"></div>
+	<div class="range-box-volume-whole">
+		全体音量: 
+		<input type="range" value="100" id="whole-volume">
+	</div>
+
+	<div class="buttons-box-play-pause">
+		<button id="play-audios-button">すべて再生(音楽のみ)</button>
+		<button id="pause-audios-button">すべて停止(音楽のみ)</button>
+	</div>
+
+	<div class="posts-box">
+		<% @posts.each do |post| %>
+			<div id="post-edit-box-<%= post.id %>" class="post-edit-box">
+				<%= render partial: 'post', locals: {post: post} %>
+			</div>
+		<% end %>
+	</div>
+	<script>
+		$(function(){
+			var range = $get_id("whole-volume");
+			$('#play-audios-button').click(function(){
+				var audios = $get_class("audios");
+				for(var i = 0; i < audios.length; i++){
+					audios[i].play();
+				}
+			});
+			$("#more-link-please").click(function(){
+				move_scroll("combination-explanation-1-box");
+			});
+			$('#pause-audios-button').click(function(){
+				var audios = $get_class("audios");
+				for(var i = 0; i < audios.length; i++){
+					audios[i].pause();
+					audios[i].currentTime = 0;
+				}
+			});
+			if(range != null){
+				range.addEventListener('input', function(){
+					var audios = $get_class("audios");
+					for(var i = 0; i < audios.length; i++){
+						audios[i].volume = range.value / 100;
+					}
+				});		
+			}
+		});
+	</script>
+<% else %>
+	<div class="form-box new-form">
+		<div class="post-form-errors-new">
+
+		</div>
+		<p><input type="file" id="audio-file_field" class="file-choose-button"></p>
+		<span id="file_button" class="file-button-demo">ファイルを選択</span><br>
+		<p id="file_name"></p>
+		<p><input type="submit" value="送信" class="post-submit"></p>
+		<div class="audio-form-show-box">
+			<div class="audio-form-box"></div>
+		</div>
+	</div>
+	<div class="border-bottom"></div>
+	<div class="range-box-volume-whole">
+		全体音量: 
+		<input type="range" value="100" id="whole-volume">
+	</div>
+
+	<div class="buttons-box-play-pause">
+		<button id="play-audios-button">すべて再生(音楽のみ)</button>
+		<button id="pause-audios-button">すべて停止(音楽のみ)</button>
+	</div>
+
+	<div class="posts-box">
+
+	</div>
+
+	<script>
+		var target_result;
+		$('#pause-audios-button').click(function(){
+			var audios = $get_class("audios");
+			for(var i = 0; i < audios.length; i++){
+				audios[i].pause();
+				audios[i].currentTime = 0;
+			}
+		});
+		$('#play-audios-button').click(function(){
+			var audios = $get_class("audios");
+			for(var i = 0; i < audios.length; i++){
+				audios[i].play();
+			}
+		});
+		$('#file_button').click(function(){
+			$('#audio-file_field').click();
+		});
+		$(`#button-audio-${id_score}`).click(function(){
+			$get_id(`audio-${id_score}`).play();
+		});
+		file_name_tasikame = ["asf" , "asx" , "acd" ,"au" , "avi" , "aif" , "dig" , "iff" , "lso" , "mid" , "midi" , "mov" , "mp3" , "mpg" , "msf" ,"qt" ,"ram" ,"rm" ,"rpm" ,"sd" ,"sdn" ,"svx" ,"vqe" ,"vqf", "vql", "wav", "wma", "wrk"]
+		var file = $get_id("audio-file_field");
+		var file_name = $get_id("file_name");
+		var id_score = 0;
+		file.addEventListener('change', (event) => {
+			for(i = 0; i < file.files.length; i++){
+				var file_name_please = file.files[i].name;
+			}
+			file_name.textContent = file_name_please;
+				var render = new FileReader();
+				render.onload = function(e){
+					file_name_tasikame.forEach(function(value){
+						if(file_name_please.replace(/.+\./g, "").match(value)){
+							$("#audio-form-show").attr("src", e.target.result);
+							$('.audio-form-box').html(`<div class='audio-form-box'><audio src='${e.target.result}' controls></audio></div>`);
+							$('.post-submit').click(function(){
+								id_score++;
+
+								$('.posts-box').append(`<div class='audios-box'><button onclick=audio_play(${id_score}) class='button-audios' id='button-audio-${id_score}'>PlAY</button><audio class='audios' id='audio-${id_score}' src='${e.target.result}'></audio></div>`);
+							});
+						}
+					});
+				}
+				render.readAsDataURL(event.target.files[0])		
+		});
+		function audio_play(e){
+			$get_id(`audio-${e}`).play();
+		}
+	</script>
+<% end %>

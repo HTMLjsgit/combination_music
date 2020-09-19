@@ -1,0 +1,50 @@
+<div class="top-image">
+	<h1 class="imagine-music-text" id="imagine-come-true-text"></h1>
+	<p class="explanation_execute">Combination musicとは？</p>
+	<p class="explanation_execute">音楽を組み合わせて、理想の音楽を探して遊ぶサービス。</p>
+	<div class="more-explanation-box">
+		<a class="more-link">
+			<span class="more-explanation-button">
+				<p class="explanation_execute" id="more-link-please">もっと詳しく</p>
+			</span>
+		</a>
+	</div>
+</div>
+<div class="combination_music_start_box">
+	<%= link_to posts_path,class: "combination_link" do %>
+		<span class="combination_music_start_button">
+			<h1 class="combination_music_start_text">
+				音楽を組み合わせる
+			</h1>
+		</span>
+	<% end %>
+</div>
+<div class="combination-explanation-1-box explabox" id="combination-explanation-1-box">
+	<h1 class="more-explanation-text"><div class="tag-box"></div>Combination musicをもっと詳しく</h1>
+	<p class="more-explanation-text-p">Combination musicは音と音を組み合わせ、理想の音楽を探すというものです。</p>
+	<div class="image-box-back-combination">
+		<div class="back-image-combination"></div>
+	</div>
+	<p class="more-explanation-text-p">以前のCombination musicをより進化させたサービスです</p>
+	<p class="more-explanation-text-p">以前のCombination musicと比べ、アップロードすることができたり</p>
+	<p class="more-explanation-text-p">音量調節などのコンテンツをそなえています</p>
+</div>
+<div class="combination-explanation-2-box explabox" id="combination-explanation-2-box">
+	<h1 class="more-explanation-text"><div class="tag-box"></div>使い方</h1>
+	<!-- 画像を設置 -->
+	<div class="image-box-back-combination">
+		<div class="back-image-combination"></div>
+	</div>
+</div>
+
+<script>
+	var ima = $get_id("imagine-come-true-text");
+	var score = 0;
+	var text_1 = "理想の音楽を実現しよう";
+	if(ima != null){
+		printchar(ima, text_1, score);
+	}
+	$("#more-link-please").click(function(){
+		move_scroll("combination-explanation-1-box");
+	});
+</script>

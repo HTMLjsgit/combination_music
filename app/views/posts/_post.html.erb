@@ -1,0 +1,115 @@
+<% if user_signed_in? %>
+	<div class="post-box" id="post-box-<%= post.id %>">
+		<div id="post-contents-box-<%= post.id %>" class="post-contents-box">
+			<h3 class="post-title" id="post-title-<%= post.id %>"><%= post.title %></h3>
+			<% if post.audio? %>
+				<% if post.sound %>
+					<div class="audios-box">
+						<button id="button-audio-<%= post.id %>" class="button-audios"><%= image_tag "audios-go.png", class: "audio-go-image" %></button>
+						<audio id="audio-<%= post.id %>" class="audios"></audio>
+						<input type="number" id="number-<%= post.id %>" class="numbers" placeholder="秒数を入力">
+					</div>
+
+					<div class="range-box">
+						音量:<input type="range" id="volume-range-<%= post.id %>" value="100">
+					</div>
+				<% else %>
+						<audio src="<%= post.audio.url %>" controls id="audio-<%= post.id %>" class="audio-post audios"></audio>
+				<% end %>
+			<% end %>
+		</div>
+		<div id="post-form-edit-<%= post.id %>" class="post-form-edit-box">
+			<div class="form-box">
+				<%= form_with model: post, local: false do |f| %>
+				<div class="errors-box" id="model-error-<%= post.id %>">
+					<%= render partial: 'layouts/error', locals: {model: post} %>
+				</div>
+
+				<p><%= f.text_field :title, placeholder: "曲名を入力", class: "title-form post-title-form" %></p>
+				<div class="sounds-form-box">
+					<%= f.label "サウンドモードをON", class: "sound-label" %>
+					<%= f.check_box :sound, checked: post.sound, class: "sound-check-box" %>
+				</div>
+				<div class="files-box">
+					<%= f.file_field :audio, class: "post_audio_form_edit", id: "audio-edit-#{post.id}-form" %><br>
+					<span id="file_button-<%= post.id %>" class="file-button-demo">ファイルを選択</span><br>
+				</div>
+				<p id="post-file-name-<%= post.id %>" class="post-audio"><%= post_audio(post) %></p>
+					<%= f.submit "送信" %>
+				<% end %>
+			</div>
+		</div>
+		<div class="kinds-edit-buttons-box">
+			<button id="button-edit-<%= post.id %>" class="edit-and-delete-box"><%= image_tag "edit.png" %>編集</button>
+			<%= link_to post_path(post), method: :delete, remote: true do %>
+				<button id="delete-button" class="edit-and-delete-box">
+					<%= image_tag "delete_box.png" %>
+					削除
+				</button>
+			<% end %>
+		</div>
+	</div>
+	<script>
+			var edit_click<%= post.id %>  = false;
+			var file_g<%= post.id %> = $get_id("audio-edit-<%= post.id %>-form");
+			var file_name<%= post.id %> = $get_id("post-file-name-<%= post.id %>");
+			var number<%= post.id %> = $get_id("number-<%= post.id %>");
+			var audio_<%= post.id %> = $get_id("audio-<%= post.id %>");		
+			var volume<%= post.id %> = $get_id("volume-range-<%= post.id %>");
+			var play_audio_timer<%= post.id %>
+			file_g<%= post.id %>.addEventListener('change', (event) => {
+				for(i = 0; i < file_g<%= post.id %>.files.length; i++){
+					file_name<%= post.id %>.textContent = file_g<%= post.id %>.files[i].name;
+				}
+			});
+			$("#button-edit-<%= post.id %>").click(function(){
+				if(edit_click<%= post.id %> == false){
+					$('#post-form-edit-<%= post.id %>').css('display', 'block');
+					$('#post-contents-box-<%= post.id %>').css('display', 'none');
+					edit_click<%= post.id %> = true;
+				}else if(edit_click<%= post.id %> == true){
+
+					$('#post-form-edit-<%= post.id %>').css('display', 'none');
+					$('#post-contents-box-<%= post.id %>').css('display', 'block');
+
+					edit_click<%= post.id %> = false;
+				}
+			});
+
+			$('#file_button-<%= post.id %>').click(function(){
+				$('#audio-edit-<%= post.id %>-form').click();
+			});
+			<% if post.audio? %>
+				<% if post.sound %>
+					volume<%= post.id %>.addEventListener('input', function(){
+						audio_<%= post.id %>.volume = volume<%= post.id %>.value / 100
+					});
+				<% end %>
+			<% end %>
+
+			$('#button-audio-<%= post.id %>').click(function(){
+					if(number<%= post.id %>.value != '' && number<%= post.id %>.value > 0){
+
+						clearInterval(play_audio_timer<%= post.id %>);
+						play_audio<%= post.id %>(number<%= post.id %>.value);
+
+					}else{
+						clearInterval(play_audio_timer<%= post.id %>);
+						
+						audio_<%= post.id %>.src = "<%= post.audio.url.to_s %>";
+						
+						audio_<%= post.id %>.play();
+					}
+			});
+			function play_audio<%= post.id %>(time){
+				if(time > 0){
+						play_audio_timer<%= post.id %> = setInterval(function(){
+						//効果音の場合はjsからもう一度srcを設定しなければならない
+						audio_<%= post.id %>.src = "<%= post.audio.url %>";
+						audio_<%= post.id %>.play();
+					}, Number(time) * 1000);			
+				}
+
+			}
+	</script>
+<% end %>
