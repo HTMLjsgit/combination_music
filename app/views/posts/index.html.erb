@@ -48,19 +48,26 @@
 		});
 	</script>
 <% else %>
-		<div class="post-form-errors-new">
-		</div>
+	<div class="post-form-errors-new">
+	</div>
+	<p id="file_name"></p>
 	<div class="form-box new-form nologin-form">
+		<div class="files-box">
+			<input type="file" id="audio-file_field" class="file-choose-button">
 
-		<input type="file" id="audio-file_field" class="file-choose-button">
-		<span id="file_button" class="file-button-demo">ファイルを選択</span><br>
-		<p id="file_name"></p>
+			<span id="file_button" class="file-button-demo">ファイルを選択</span><br>
+			<div class="post-form-sound-box">
+				<p>サウンドモード</p>
+				<input type="checkbox" id="check-box-post" value="false">
+			</div>
+		</div>
 		<p><input type="submit" value="送信" class="post-submit"></p>
 	</div>
 	<div class="audio-form-show-box">
 		<div class="audio-form-box"></div>
 	</div>
 	<div class="border-bottom"></div>
+	<br>
 	<div class="range-box-volume-whole">
 		全体音量: 
 		<input type="range" value="100" id="whole-volume">
@@ -76,6 +83,18 @@
 	</div>
 
 	<script>
+		var lie_or_true = false;
+		var result;
+		var range = $get_id("whole-volume");
+		if(range != null){
+			range.addEventListener('input', function(){
+				var audios = $get_class("audios");
+				for(var i = 0; i < audios.length; i++){
+					audios[i].volume = range.value / 100;
+				}
+			});		
+		}
+
 		$('#pause-audios-button').click(function(){
 			var audios = $get_class("audios");
 			for(var i = 0; i < audios.length; i++){
@@ -83,6 +102,7 @@
 				audios[i].currentTime = 0;
 			}
 		});
+
 		$('#play-audios-button').click(function(){
 			var audios = $get_class("audios");
 			for(var i = 0; i < audios.length; i++){
@@ -104,34 +124,52 @@
 				var file_name_please = file.files[i].name;
 			}
 			file_name.textContent = file_name_please;
-			render = new FileReader();
+			var render = new FileReader();
 			render.onload = function(e){
 				file_name_tasikame.forEach(function(value){
 					if(file_name_please.replace(/.+\./g, "").match(value)){
 						$("#audio-form-show").attr("src", e.target.result);
 						$('.audio-form-box').html(`<div class='audio-form-box'><audio src='${e.target.result}' controls></audio></div>`);
+							lie_or_true = true;
+
 					}
 				});
 				result = e.target.result;
 			}
 			render.readAsDataURL(event.target.files[0])		
 		});
-		$('.post-submit').click(function(){
-			if(result != ''){
-				id_score++;
-				$('.posts-box').append(`<div class='audios-box'><button onclick=audio_play(${id_score}) class='button-audios' id='button-audio-${id_score}'>PlAY</button><audio class='audios' id='audio-${id_score}' src='${result}'></audio></div>`);
-				$get_id("audio-file_field").value = '';
-				$get_id("file_name").textContent = '';
-				$('.audio-form-box').html('');
-				result = '';
-			}
+			$('.post-submit').click(function(){
+				if(result != ''){
+					if(lie_or_true){
+						var check = $get_id("check-box-post").checked;
+						id_score++;
+						if(check){
+							$('.posts-box').append(`<div class='audios-box'><button onclick=audio_play(${id_score}) class='button-audios' id='button-audio-${id_score}'>PlAY</button><audio class='audios' id='audio-${id_score}' src='${result}'></audio></div>`);
+						}else{
+							$('.posts-box').append(`<div class='audios-box'><audio class='audios' id='audio-${id_score}' src='${result}' controls></audio></div>`);		
+						}
+						$get_id("audio-file_field").value = '';
+						$get_id("file_name").textContent = '';
+						check = false;
+						$('.audio-form-box').html('');
+						result = '';
+						lie_or_true = false;
+					}
+				}
+			});
 
-		});
 		function audio_play(e){
 			$get_id(`audio-${e}`).play();
 		}
 	</script>
 	<style>
+		.button-audios{
+			width: 300px;
+			height: 50px;
+		}
+		.audios-box{
+			margin: 20px;
+		}
 		.audio-form-show-box{
 			display: flex;
 			justify-content: center;
@@ -140,6 +178,19 @@
 		#file_name{
 			margin-left: 10px;
 			margin-right: 10px;
+		}
+		.posts-box{
+			max-width: 900px;
+			margin: 0 auto;
+			padding-top: 70px;
+		}
+		@media screen and (max-width: 480px){
+			.button-audios{
+				width: 100%;
+			}
+			.audios{
+				width: 100%;
+			}
 		}
 	</style>
 <% end %>

@@ -10,6 +10,7 @@
 }
 .audio-form-show-box{
 	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 p .post-title-form{
@@ -325,6 +326,7 @@ button:hover{
 	flex-wrap: wrap;
 	margin: 20px;
 }
+
 .post_audio_form_edit{
 	visibility: hidden;
 	height: 0;
@@ -372,6 +374,25 @@ button:hover{
 	border-bottom: 1px solid #000000;
 
 }
+.post-form-sound-box{
+	display: flex;
+	padding-top: 5px;
+}
+.files-box{
+	display: flex;
+	padding-right: 30px;
+}
+.file-button-demo{
+	padding: 5px;
+}
+#file_name{
+	text-align: center;
+	max-width: 100%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin-bottom: 20px;
+}
+
 @keyframes anim_go{
 	0%{
 		opacity: 0;
@@ -397,6 +418,27 @@ button:hover{
 @media screen and (max-width: 480px){
 	.posts-box #post-edit-box{
 		margin-bottom: 50px;
+	}
+	.nologin-form{
+		display: block;
+	}
+	.audios-box{
+		width: 100%;
+	}
+	.post-submit{
+		margin: 0 auto;
+		max-width: 100px;
+		text-align: center;
+		display: flex;
+		justify-content: center;
+	}
+	.post-form-sound-box{
+		padding-top: 10px;
+	}
+
+	.files-box{
+		display: flex;
+		justify-content: center;
 	}
 	.explabox{
 		padding-right: 20px;
