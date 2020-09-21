@@ -1,4 +1,5 @@
-$('.posts-box').append("<div id='post-edit-box-<%= @post.id %>'><%= j(render partial: 'post', locals: {post: @post}) %></div>");
+$('.posts-box').append("<div id='post-edit-box-<%= @post.id %>' class='post-edit-box'><%= j(render partial: 'post', locals: {post: @post}) %></div>");
 $get_id('post_title').value = '';
 $get_id('audio-file_field').value = '';
 $get_id('file_name').textContent = '';
+$get_id('audio-form-box-id').innerHTML = '';

@@ -45,7 +45,7 @@
 				file_name_tasikame.forEach(function(value){
 					if(file_name_please.replace(/.+\./g, "").match(value)){
 						$("#audio-form-show").attr("src", e.target.result);
-						$('.audio-form-box').html(`<div class='audio-form-box'><audio src='${e.target.result}' controls></audio></div>`);	
+						$('.audio-form-box').html(`<div class='audio-form-box' id='audio-form-box-id'><audio src='${e.target.result}' controls></audio></div>`);	
 					}
 				});
 			}
