@@ -6,6 +6,11 @@ class PostsController < ApplicationController
   def index
     if user_signed_in?
       @posts = current_user.posts
+      @posts.each do |post|
+      	if post.audio.url.blank?
+      		post.destroy
+      	end
+      end
     end
     @post = Post.new
   end
@@ -22,11 +27,11 @@ class PostsController < ApplicationController
   end
 
   def update
- 	if @post.update(create_params)
-		render 'update.js.erb'
- 	else
-		render 'error-update.js.erb'
- 	end
+   	if @post.update(create_params)
+  		render 'update.js.erb'
+   	else
+  		render 'error-update.js.erb'
+   	end
   end
 
   def destroy

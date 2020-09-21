@@ -1,4 +1,5 @@
 <% if user_signed_in? %>
+
 	<%= render 'form' %>
 	<div class="border-bottom"></div>
 	<div class="range-box-volume-whole">
@@ -83,8 +84,8 @@
 	</div>
 
 	<div class="buttons-box-play-pause">
-		<button id="play-audios-button">すべて再生(音楽のみ)</button>
-		<button id="pause-audios-button">すべて停止(音楽のみ)</button>
+		<button id="play-audios-button">すべて再生</button>
+		<button id="pause-audios-button">すべて停止</button>
 	</div>
 
 	<div class="posts-box">
@@ -155,9 +156,9 @@
 					var check = $get_id("check-box-post").checked;
 					id_score++;
 					if(check){
-						$('.posts-box').append(`<div class='audios-box' id='post-box-${id_score}'><button onclick=audio_play(${id_score}) class='button-audios' id='button-audio-${id_score}'>PlAY</button><audio class='audios' id='audio-${id_score}' src='${result}'></audio><div class='delete-audio-box'><button id='delete-button' class='edit-and-delete-box' onclick=delete_audio(${id_score})><%= image_tag 'delete-icon.png' %></button></div></div>`);
+						$('.posts-box').append(`<div class='audios-box' id='post-box-${id_score}'><button onclick=audio_play(${id_score}) class='button-audios' id='button-audio-${id_score}'>PlAY</button><audio class='audios' id='audio-${id_score}' src='${result}'></audio><div class='delete-audio-box'><button id='delete-button' class='edit-and-delete-box' onclick=delete_audio(${id_score})><%= image_tag 'delete-icon.png' %>削除</button></div></div>`);
 					}else{
-						$('.posts-box').append(`<div class='audios-box' id='post-box-${id_score}'><audio class='audios' id='audio-${id_score}' src='${result}' controls></audio><div class='delete-audio-box'><button id='delete-button' class='edit-and-delete-box' onclick=delete_audio(${id_score})><%= image_tag 'delete-icon.png' %></button></div></div>`);		
+						$('.posts-box').append(`<div class='audios-box' id='post-box-${id_score}'><audio class='audios' id='audio-${id_score}' src='${result}' controls></audio><div class='delete-audio-box'><button id='delete-button' class='edit-and-delete-box' onclick=delete_audio(${id_score})><%= image_tag 'delete-icon.png' %>削除</button></div></div>`);		
 					}
 					$get_id("audio-file_field").value = '';
 					$get_id("file_name").textContent = '';
