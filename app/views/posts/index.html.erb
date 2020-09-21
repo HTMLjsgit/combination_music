@@ -150,9 +150,9 @@
 					var check = $get_id("check-box-post").checked;
 					id_score++;
 					if(check){
-						$('.posts-box').append(`<div class='audios-box'><button onclick=audio_play(${id_score}) class='button-audios' id='button-audio-${id_score}'>PlAY</button><audio class='audios' id='audio-${id_score}' src='${result}'></audio></div>`);
+						$('.posts-box').append(`<div class='audios-box' id='post-box-${id_score}'><button onclick=audio_play(${id_score}) class='button-audios' id='button-audio-${id_score}'>PlAY</button><audio class='audios' id='audio-${id_score}' src='${result}'></audio><div class='delete-audio-box'><button id='delete-button' class='edit-and-delete-box' onclick=delete_audio(${id_score})><%= image_tag 'delete-icon.png' %></button></div></div>`);
 					}else{
-						$('.posts-box').append(`<div class='audios-box'><audio class='audios' id='audio-${id_score}' src='${result}' controls></audio></div>`);		
+						$('.posts-box').append(`<div class='audios-box' id='post-box-${id_score}'><audio class='audios' id='audio-${id_score}' src='${result}' controls></audio><div class='delete-audio-box'><button id='delete-button' class='edit-and-delete-box' onclick=delete_audio(${id_score})><%= image_tag 'delete-icon.png' %></button></div></div>`);		
 					}
 					$get_id("audio-file_field").value = '';
 					$get_id("file_name").textContent = '';
@@ -170,8 +170,17 @@
 			audio.play();
 		}
 
+		function delete_audio(e){
+			$(`#post-box-${e}`).remove();
+		}
+
 	</script>
 	<style>
+		.delete-audio-box{
+			margin-top: 20px;
+			display: flex;
+			justify-content: center;
+		}
 		.button-audios{
 			width: 300px;
 			height: 50px;
@@ -179,7 +188,13 @@
 			font-size: 20px;
 			font-weight: bold;
 		}
+		#delete-button{
+			padding: 10px;
+		}
 		.audios-box{
+			border: 1px solid #000000;
+			border-radius: 5px;
+			padding: 20px;
 			margin: 20px;
 			max-width: 300px;
 
@@ -197,6 +212,9 @@
 			max-width: 900px;
 			margin: 0 auto;
 			padding-top: 70px;
+		}
+		.post-box{
+			display: block;
 		}
 		@media screen and (max-width: 480px){
 			.button-audios{
