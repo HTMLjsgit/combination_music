@@ -12,10 +12,63 @@
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
+.google-login-box{
+}
+.google-link{
+	text-decoration: none;
+}
+.google-link-box-main{
+	display: flex;
 
+}
+.login-all-link{
+	text-decoration: none;
+	color: #207EB2;
+}
+.login-all-link:hover{
+	text-decoration: underline;
+}
+.google-link:hover{
+	.google-link-box-main{
+		background-color: #fefefe;
+	}
+}
+.link-before-login-google{
+
+	border: 1px solid #000000;
+	width: 50%;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+
+.g-logo-png{
+	width: 40px;
+	height: 40px;
+}
+.center-login-box{
+	margin: 0 auto;
+	max-width: 800px;
+	padding-left: 40px;
+	padding-top: 40px;
+}
+.registration-text{
+	font-size: 25px;
+	padding-bottom: 30px;
+}
+.google-registration-text{
+	font-size: 20px;
+	color: #000000;
+	padding-top: 10px;
+	padding-left: 5px;
+}
 p .post-title-form{
 	width: 100%;
 	max-width: 100%;
+}
+.release_the_login{
+	text-align: center;
+	margin-top: 10px;
 }
 
 .new-form{
@@ -52,8 +105,8 @@ p .post-title-form{
     transition: background-color 0.3s ease;
     background-color: #4683B7;
 }
-.play-audios-button{
-	margin-right: 10px;
+#play-audios-button{
+	margin-right: 20px;
 }
 .imagine-music-text{
 	height: 339.98px;
@@ -376,7 +429,8 @@ button:hover{
 }
 .post-form-sound-box{
 	display: flex;
-	padding-top: 5px;
+	padding-top: 10px;
+
 }
 .files-box{
 	display: flex;
@@ -419,6 +473,28 @@ button:hover{
 	.posts-box #post-edit-box{
 		margin-bottom: 50px;
 	}
+	.center-login-box{
+		margin: 0;
+		width: 100%;
+		padding: 0;
+	}
+	.registration-text{
+		padding: 20px;
+		font-size: 20px;
+	}
+	.google-login-box{
+
+	}
+	.google-link-box-main{
+	}
+	.link-before-login-google{
+		justify-content: center;
+		display: flex;
+		width: 90%;
+		text-align: center;
+		margin: 10px;
+		
+	}
 	.nologin-form{
 		display: block;
 	}
@@ -433,7 +509,6 @@ button:hover{
 		justify-content: center;
 	}
 	.post-form-sound-box{
-		padding-top: 10px;
 	}
 
 	.files-box{

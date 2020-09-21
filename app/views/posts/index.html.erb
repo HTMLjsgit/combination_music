@@ -37,6 +37,7 @@
 					audios[i].currentTime = 0;
 				}
 			});
+
 			if(range != null){
 				range.addEventListener('input', function(){
 					var audios = $get_class("audios");
@@ -48,6 +49,9 @@
 		});
 	</script>
 <% else %>
+	<p class="release_the_login">
+		<%= link_to "ログインしてすべての機能を開放する", new_user_session_path, class: "login-all-link" %>
+	</p>
 	<div class="post-form-errors-new">
 	</div>
 	<p id="file_name"></p>
@@ -86,6 +90,8 @@
 		var lie_or_true = false;
 		var result;
 		var range = $get_id("whole-volume");
+		var play_audio_timer;
+		var go;
 		if(range != null){
 			range.addEventListener('input', function(){
 				var audios = $get_class("audios");
@@ -138,37 +144,45 @@
 			}
 			render.readAsDataURL(event.target.files[0])		
 		});
-			$('.post-submit').click(function(){
-				if(result != ''){
-					if(lie_or_true){
-						var check = $get_id("check-box-post").checked;
-						id_score++;
-						if(check){
-							$('.posts-box').append(`<div class='audios-box'><button onclick=audio_play(${id_score}) class='button-audios' id='button-audio-${id_score}'>PlAY</button><audio class='audios' id='audio-${id_score}' src='${result}'></audio></div>`);
-						}else{
-							$('.posts-box').append(`<div class='audios-box'><audio class='audios' id='audio-${id_score}' src='${result}' controls></audio></div>`);		
-						}
-						$get_id("audio-file_field").value = '';
-						$get_id("file_name").textContent = '';
-						check = false;
-						$('.audio-form-box').html('');
-						result = '';
-						lie_or_true = false;
+		$('.post-submit').click(function(){
+			if(result != ''){
+				if(lie_or_true){
+					var check = $get_id("check-box-post").checked;
+					id_score++;
+					if(check){
+						$('.posts-box').append(`<div class='audios-box'><button onclick=audio_play(${id_score}) class='button-audios' id='button-audio-${id_score}'>PlAY</button><audio class='audios' id='audio-${id_score}' src='${result}'></audio></div>`);
+					}else{
+						$('.posts-box').append(`<div class='audios-box'><audio class='audios' id='audio-${id_score}' src='${result}' controls></audio></div>`);		
 					}
+					$get_id("audio-file_field").value = '';
+					$get_id("file_name").textContent = '';
+					check = false;
+					$('.audio-form-box').html('');
+					result = '';
+					lie_or_true = false;
 				}
-			});
+			}
+		});
 
 		function audio_play(e){
-			$get_id(`audio-${e}`).play();
+			var audio = $get_id(`audio-${e}`);
+			audio.src = audio.src;
+			audio.play();
 		}
+
 	</script>
 	<style>
 		.button-audios{
 			width: 300px;
 			height: 50px;
+			border-radius: 15px;
+			font-size: 20px;
+			font-weight: bold;
 		}
 		.audios-box{
 			margin: 20px;
+			max-width: 300px;
+
 		}
 		.audio-form-show-box{
 			display: flex;
