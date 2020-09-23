@@ -20,7 +20,7 @@
 				<div class="audio-form-box"></div>
 			</div>
 			<p><%= f.file_field :audio, id: "audio-file_field", class: "file-choose-button" %></p>
-
+			<p><%= f.hidden_field :url, value: "", id: "audio_url" %></p>
 			<div class="center-flex-box">
 				<p><%= f.submit "送信する", class: "post-submit" %></p>
 			</div>
@@ -28,8 +28,16 @@
 	</div>
 <% end %>
 <script>
+
+  var url;
+  var audio_context;
+  var recorder;
+
 	$('#file_button').click(function(){
 		$('#audio-file_field').click();
+	});
+	$("voice_start_button").click(function(){
+		
 	});
 	file_name_tasikame = ["asf" , "asx" , "acd" ,"au" , "avi" , "aif" , "dig" , "iff" , "lso" , "mid" , "midi" , "mov" , "mp3" , "mpg" , "msf" ,"qt" ,"ram" ,"rm" ,"rpm" ,"sd" ,"sdn" ,"svx" ,"vqe" ,"vqf", "vql", "wav", "wma", "wrk"]
 	var file = $get_id("audio-file_field");
@@ -52,5 +60,5 @@
 			render.readAsDataURL(event.target.files[0])		
 
 	});
-		
-</script>
+
+ </script>

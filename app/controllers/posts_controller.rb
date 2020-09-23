@@ -6,17 +6,13 @@ class PostsController < ApplicationController
   def index
     if user_signed_in?
       @posts = current_user.posts
-      @posts.each do |post|
-      	if post.audio.url.blank?
-      		post.destroy
-      	end
-      end
     end
     @post = Post.new
   end
 
 
   def create
+
   	@post = Post.new(create_params)
     @post.user_id = current_user.id
   	if @post.save

@@ -14,7 +14,11 @@
 						音量:<input type="range" id="volume-range-<%= post.id %>" value="100">
 					</div>
 				<% else %>
-						<audio src="<%= post.audio.url %>" controls id="audio-<%= post.id %>" class="audio-post audios"></audio>
+					<audio src="<%= post.audio.url %>" controls id="audio-<%= post.id %>" class="audio-post audios"></audio>
+					<div class="roop-box-post">
+						<p>ループさせる</p>
+						<input type="checkbox" id="loop-check-<%= post.id %>">
+					</div>
 				<% end %>
 			<% end %>
 		</div>
@@ -58,6 +62,7 @@
 			var audio_<%= post.id %> = $get_id("audio-<%= post.id %>");		
 			var volume<%= post.id %> = $get_id("volume-range-<%= post.id %>");
 			var play_audio_timer<%= post.id %>
+			var loop_check<%= post.id %> = $get_id("loop-check-<%= post.id %>");
 			// observer.observe(audio_<%= post.id %>, {
 			// 	attributes: true
 			// });
@@ -76,6 +81,7 @@
 					file_name<%= post.id %>.textContent = file_g<%= post.id %>.files[i].name;
 				}
 			});
+
 			$("#button-edit-<%= post.id %>").click(function(){
 				if(edit_click<%= post.id %> == false){
 					$('#post-form-edit-<%= post.id %>').css('display', 'block');
@@ -89,6 +95,16 @@
 					edit_click<%= post.id %> = false;
 				}
 			});
+			if(loop_check<%= post.id %> != null){
+				loop_check<%= post.id %>.addEventListener('change', function(){
+					if(loop_check<%= post.id %>.checked){
+						audio_<%= post.id %>.loop = true;
+					}else{
+						audio_<%= post.id %>.loop = false;
+
+					}
+				});					
+			}
 
 			$('#file_button-<%= post.id %>').click(function(){
 				$('#audio-edit-<%= post.id %>-form').click();

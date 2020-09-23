@@ -11,7 +11,10 @@
 		<button id="play-audios-button">すべて再生(音楽のみ)</button>
 		<button id="pause-audios-button">すべて停止(音楽のみ)</button>
 	</div>
-
+	<div class="roop-box-post">
+		<p>すべてループさせる</p>
+		<input type="checkbox" id="loops-check">
+	</div>
 	<div class="posts-box">
 		<% @posts.each do |post| %>
 			<div id="post-edit-box-<%= post.id %>" class="post-edit-box">
@@ -19,6 +22,7 @@
 			</div>
 		<% end %>
 	</div>
+	
 	<style>
 		.audios-box{
 			display: flex;
@@ -27,10 +31,23 @@
 	<script>
 		$(function(){
 			var range = $get_id("whole-volume");
+			var loops = $get_id("loops-check");
 			$('#play-audios-button').click(function(){
 				var audios = $get_class("audios");
 				for(var i = 0; i < audios.length; i++){
 					audios[i].play();
+				}
+			});
+			loops.addEventListener('change', function(){
+				var audios = $get_class("audios");
+				if(loops.checked){
+					for(i = 0; i < audios.length; i++){
+						audios[i].loop = true;
+					}
+				}else{
+					for(i = 0; i < audios.length; i++){
+						audios[i].loop = false;
+					}
 				}
 			});
 			$("#more-link-please").click(function(){
@@ -40,7 +57,6 @@
 				var audios = $get_class("audios");
 				for(var i = 0; i < audios.length; i++){
 					audios[i].pause();
-					audios[i].currentTime = 0;
 				}
 			});
 
@@ -97,7 +113,6 @@
 		var result;
 		var range = $get_id("whole-volume");
 		var play_audio_timer;
-		var go;
 		if(range != null){
 			range.addEventListener('input', function(){
 				var audios = $get_class("audios");
@@ -111,7 +126,6 @@
 			var audios = $get_class("audios");
 			for(var i = 0; i < audios.length; i++){
 				audios[i].pause();
-				audios[i].currentTime = 0;
 			}
 		});
 
@@ -143,7 +157,6 @@
 						$("#audio-form-show").attr("src", e.target.result);
 						$('.audio-form-box').html(`<div class='audio-form-box'><audio src='${e.target.result}' controls></audio></div>`);
 							lie_or_true = true;
-
 					}
 				});
 				result = e.target.result;
@@ -151,21 +164,29 @@
 			render.readAsDataURL(event.target.files[0])		
 		});
 		$('.post-submit').click(function(){
-			if(result != ''){
-				if(lie_or_true){
-					var check = $get_id("check-box-post").checked;
-					id_score++;
-					if(check){
-						$('.posts-box').append(`<div class='audios-box' id='post-box-${id_score}'><button onclick=audio_play(${id_score}) class='button-audios' id='button-audio-${id_score}'>PlAY</button><audio class='audios' id='audio-${id_score}' src='${result}'></audio><div class='delete-audio-box'><button id='delete-button' class='edit-and-delete-box' onclick=delete_audio(${id_score})><%= image_tag 'delete-icon.png' %>削除</button></div></div>`);
+			if($get_id("file_name").textContent == ''){
+				$('.post-form-errors-new').html(`<div class='error-box'><li class='error_message'>ファイルを選択してください。</li></div>`);
+			}
+			if($get_id("file_name").textContent != ''){
+				if(result != ''){
+					if(lie_or_true){
+						var check = $get_id("check-box-post").checked;
+						id_score++;
+						if(check){
+							$('.posts-box').append(`<div class='audios-box' id='post-box-${id_score}'><button onclick=audio_play(${id_score}) class='button-audios' id='button-audio-${id_score}'>PlAY</button><audio class='audios' id='audio-${id_score}' src='${result}'></audio><div class='delete-audio-box'><button id='delete-button' class='edit-and-delete-box' onclick=delete_audio(${id_score})><%= image_tag 'delete-icon.png' %>削除</button></div></div>`);
+						}else{
+							$('.posts-box').append(`<div class='audios-box' id='post-box-${id_score}'><audio class='audios' id='audio-${id_score}' src='${result}' controls></audio><div class='delete-audio-box'><button id='delete-button' class='edit-and-delete-box' onclick=delete_audio(${id_score})><%= image_tag 'delete-icon.png' %>削除</button></div><div class='roop-box-post'><p>ループさせる</p><input type='checkbox' onclick=check(${id_score}) id='loop-check-${id_score}'></div></div>`);
+						}
+						$get_id("audio-file_field").value = '';
+						$get_id("file_name").textContent = '';
+						check = false;
+						$('.audio-form-box').html('');
+						result = '';
+						lie_or_true = false;
+						$('.post-form-errors-new').html(``);
 					}else{
-						$('.posts-box').append(`<div class='audios-box' id='post-box-${id_score}'><audio class='audios' id='audio-${id_score}' src='${result}' controls></audio><div class='delete-audio-box'><button id='delete-button' class='edit-and-delete-box' onclick=delete_audio(${id_score})><%= image_tag 'delete-icon.png' %>削除</button></div></div>`);		
+						$('.post-form-errors-new').html(`<div class='error-box'><li class='error_message'>音楽ファイルを選択してください。</li></div>`);
 					}
-					$get_id("audio-file_field").value = '';
-					$get_id("file_name").textContent = '';
-					check = false;
-					$('.audio-form-box').html('');
-					result = '';
-					lie_or_true = false;
 				}
 			}
 		});
@@ -178,6 +199,17 @@
 
 		function delete_audio(e){
 			$(`#post-box-${e}`).remove();
+		}
+		function check(e){
+			var audio = $get_id(`audio-${e}`);
+			var check = $get_id(`loop-check-${id_score}`);
+			console.log(check.checked);
+			if(check.checked){
+				audio.loop = true;
+
+			}else{
+				audio.loop = false;
+			}
 		}
 
 	</script>
@@ -197,6 +229,11 @@
 		#delete-button{
 			padding: 10px;
 		}
+		.post-form-errors-new{
+			margin: 0 auto;
+			max-width: 300px;
+			text-align: center;
+		}
 		.audios-box{
 			border: 1px solid #000000;
 			border-radius: 5px;
@@ -213,6 +250,10 @@
 		#file_name{
 			margin-left: 10px;
 			margin-right: 10px;
+			margin-top: 20px;
+		}
+		.post-form-errors-new{
+			margin-top: 30px;
 		}
 		.posts-box{
 			max-width: 900px;

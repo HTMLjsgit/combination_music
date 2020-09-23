@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_21_203949) do
+ActiveRecord::Schema.define(version: 2020_09_22_012912) do
 
   create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "audio"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2020_09_21_203949) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
     t.boolean "sound", default: false
+    t.boolean "voice", default: false
   end
 
   create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
