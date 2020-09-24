@@ -17,6 +17,9 @@
 a{
   cursor: pointer;
 }
+.combinationmusic-top{
+  color: #ffffff;
+}
 input[type="checkbox"]{
   cursor: pointer;
 }
@@ -24,9 +27,9 @@ input[type="checkbox"]{
 	font-size: 30px;
 }
 .top-box{
-	background-color: #eeeeee;
 	padding: 20px;
-
+  background-color: #535558;
+  position: sticky;
 }
 body{
 font-family: "Noto Sans JP", sans-serif;
@@ -38,6 +41,20 @@ font-family: "Noto Sans JP", sans-serif;
 .menu-text{
 	padding-top: 5px;
 }
+.menu-text a{
+  text-decoration: none;
+  color: #ffffff;
+}
+.menu-text a::after{
+  transition: 0.5s;
+  height: 2px;
+  width: 0%;
+  background-color: #ffffff;
+}
+.menu-text a:after:hover{
+  width: 100%;
+}
+
 .top-nav{
 	display: flex;
 }
@@ -46,9 +63,7 @@ font-family: "Noto Sans JP", sans-serif;
 	list-style: none;
 
 }
-.contents-box{
-	display: flex;
-}
+
 .top-nav li h1{
   font-size: 17px;
 

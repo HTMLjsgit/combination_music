@@ -60,6 +60,8 @@ gem 'rails-i18n'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'dotenv-rails'
+gem 'meta-tags'
+
 group :production do
   gem 'pg'
 end
