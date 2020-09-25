@@ -75,12 +75,19 @@ p .post-title-form{
 .release_the_login{
 	text-align: center;
 	margin-top: 10px;
+	margin-bottom: 20px;
 }
-
+.play-image{
+	padding-top: 2px;
+	padding-left: 5px;
+}
 .new-form{
 	margin: 20px;
 	display: flex;
 	justify-content: center;
+}
+#pause-audios-button{
+	display: flex;
 }
 .error_message{
 	width: 100%;
@@ -113,6 +120,7 @@ p .post-title-form{
 }
 #play-audios-button{
 	margin-right: 20px;
+	display: flex;
 }
 .imagine-music-text{
 	height: 339.98px;
@@ -125,8 +133,15 @@ p .post-title-form{
 	margin-top: 7px;
 	margin-bottom: 10px;
 }
+.combination_text{
+	color: #ffffff;
+	text-decoration: none;
+}
 .more-explanation-text{
 	display: flex;
+}
+.combination_music_top_box{
+	width: 100%;
 }
 .explabox{
 	padding-left: 20px;
@@ -325,12 +340,44 @@ input[type="submit"]{
 .delete-box{
 	display: flex;
 }
+.pause-button{
+	display: none;
+}
 .flex-box{
 	display: flex;
 }
-.edit-and-delete-button{
-	border-radius: 10px;
+.all-minute-audio-reset-button{
+	margin-left: 20px;
+}
+.edit-button{
+	padding: 3px;
+	border-radius: 5px;
+	color: #ffffff;
+	font-weight: bold;
 	display: flex;
+	box-shadow: 2px 2px 3px #dddddd;
+	background-color: #4299C5;
+}
+.edit-button:hover{
+	transition: 0.3s ease background-color;
+	background-color: #4387A9;	
+}
+#delete-button{
+	padding: 3px;
+	border-radius: 5px;
+	background-color: #F23333;
+	color: #ffffff;
+	font-weight: bold;
+	display: flex;
+	box-shadow: 2px 2px 3px #dddddd;
+}
+#delete-button:hover{
+	transition: 0.3s ease background-color;
+	background-color: #D92828;
+}
+.edit-and-delete-button:hover{
+	transition: 0.3s ease background-color;
+	background-color: #D92828;
 }
 .title-form{
 	margin-top: 5px;
@@ -357,6 +404,7 @@ input[type="submit"]{
 	text-align: center;
 }
 .audios-box{
+
 }
 .button-audios{
 	border-radius: 15px 0 0 15px;
@@ -420,6 +468,9 @@ button:hover{
 	margin-bottom: 20px;
 	margin-left: 20px;
 	justify-content: center;
+}
+.kinds-edit-buttons-box a{
+	text-decoration: none;
 }
 .kinds-edit-buttons-box button{
 	margin-right: 20px;

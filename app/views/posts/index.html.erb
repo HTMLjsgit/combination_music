@@ -8,8 +8,8 @@
 	</div>
 
 	<div class="buttons-box-play-pause">
-		<button id="play-audios-button">すべて再生(音楽のみ)</button>
-		<button id="pause-audios-button">すべて停止(音楽のみ)</button>
+		<button id="play-audios-button">すべて再生<%= image_tag "playback.png", class: "play-image" %></button><button id="pause-audios-button">すべて停止<%= image_tag "pause.png", class: "play-image" %></button>
+		<button class="all-minute-audio-reset-button">すべて秒数リセット</button>
 	</div>
 	<div class="roop-box-post">
 		<p>すべてループさせる</p>
@@ -34,10 +34,26 @@
 			var loops = $get_id("loops-check");
 			$('#play-audios-button').click(function(){
 				var audios = $get_class("audios");
+				var buttons_audios = $get_class("button-audios");
 				for(var i = 0; i < audios.length; i++){
 					audios[i].play();
+
+				}
+				for(var i = 0; i < buttons_audios.length; i++){
+					buttons_audios[i].click();
+
 				}
 			});
+			$(".all-minute-audio-reset-button").click(function(){
+				var audios = $get_class("audios");
+				var numbers = $get_class("numbers");
+				for(var i = 0; i < audios.length; i++){
+					audios[i].currentTime = 0;
+				}
+				for(var i = 0; i < numbers.length; i++){
+					numbers[i].value = '';
+				}
+			});	
 			loops.addEventListener('change', function(){
 				var audios = $get_class("audios");
 				if(loops.checked){
@@ -55,8 +71,14 @@
 			});
 			$('#pause-audios-button').click(function(){
 				var audios = $get_class("audios");
+				var button_pause = $get_class("pause-button");
+				var button_audios = $get_class("button-audios");
 				for(var i = 0; i < audios.length; i++){
 					audios[i].pause();
+
+				}
+				for(var i = 0; i < button_audios.length; i++){
+					button_pause[i].click();
 				}
 			});
 
@@ -71,9 +93,6 @@
 		});
 	</script>
 <% else %>
-	<p class="release_the_login">
-		<%= link_to "ログインしてすべての機能を開放する", new_user_session_path, class: "login-all-link" %>
-	</p>
 	<div class="post-form-errors-new">
 	</div>
 	<p id="file_name"></p>
@@ -92,6 +111,9 @@
 	<div class="audio-form-show-box">
 		<div class="audio-form-box"></div>
 	</div>
+	<p class="release_the_login">
+		<%= link_to "ログインしてすべての機能を開放する", new_user_session_path, class: "login-all-link" %>
+	</p>
 	<div class="border-bottom"></div>
 	<br>
 	<div class="range-box-volume-whole">
@@ -100,8 +122,8 @@
 	</div>
 
 	<div class="buttons-box-play-pause">
-		<button id="play-audios-button">すべて再生</button>
-		<button id="pause-audios-button">すべて停止</button>
+		<button id="play-audios-button">すべて再生<%= image_tag "playback.png" , class: "play-image"%></button>
+		<button id="pause-audios-button">すべて停止<%= image_tag "pause.png", class: "play-image" %></button>
 	</div>
 
 	<div class="posts-box">
@@ -128,13 +150,22 @@
 				audios[i].pause();
 			}
 		});
-
 		$('#play-audios-button').click(function(){
 			var audios = $get_class("audios");
+			var buttons = $get_class("button-audios");
 			for(var i = 0; i < audios.length; i++){
 				audios[i].play();
 			}
+			for(var i = 0; i < buttons.length; i++){
+				buttons[i].click();
+			}
 		});
+		$(".all-minute-audio-reset-button").click(function(){
+			var audios = $get_class("audios");
+			for(var i = 0; i < audios.length; i++){
+				audios[i].currentTime = 0;
+			}
+		});	
 		$('#file_button').click(function(){
 			$('#audio-file_field').click();
 		});
@@ -226,9 +257,7 @@
 			font-size: 20px;
 			font-weight: bold;
 		}
-		#delete-button{
-			padding: 10px;
-		}
+
 		.post-form-errors-new{
 			margin: 0 auto;
 			max-width: 300px;

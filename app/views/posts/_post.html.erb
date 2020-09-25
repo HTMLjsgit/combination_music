@@ -5,7 +5,12 @@
 			<% if post.audio? %>
 				<% if post.sound %>
 					<div class="audios-box">
+						<!-- デフォルトの再生ボタン -->
 						<button id="button-audio-<%= post.id %>" class="button-audios"><%= image_tag "audios-go.png", class: "audio-go-image" %></button>
+
+						<!-- 再生ボタンを押したあとに変わる予定のHTML -->
+						<button id="button-pause-<%= post.id %>" class="pause-button"><%= image_tag "pause_size2.png", class: "audio-go-image" %></button>
+
 						<audio id="audio-<%= post.id %>" class="audios"></audio>
 						<input type="number" id="number-<%= post.id %>" class="numbers" placeholder="秒数を入力">
 					</div>
@@ -44,7 +49,7 @@
 			</div>
 		</div>
 		<div class="kinds-edit-buttons-box">
-			<button id="button-edit-<%= post.id %>" class="edit-and-delete-box"><%= image_tag "edit.png" %>編集</button>
+			<button id="button-edit-<%= post.id %>" class="edit-button edit-and-delete-box"><%= image_tag "edit.png" %>編集</button>
 			<%= link_to post_path(post), method: :delete, remote: true do %>
 				<button id="delete-button" class="edit-and-delete-box">
 					<%= image_tag "delete_box.png" %>
@@ -53,6 +58,9 @@
 			<% end %>
 		</div>
 	</div>
+	<style>
+
+	</style>
 	<script>
 
 			var edit_click<%= post.id %>  = false;
@@ -63,6 +71,8 @@
 			var volume<%= post.id %> = $get_id("volume-range-<%= post.id %>");
 			var play_audio_timer<%= post.id %>
 			var loop_check<%= post.id %> = $get_id("loop-check-<%= post.id %>");
+			var button_audio_pause<%= post.id %> = $get_id("button-audio-<%= post.id %>");
+			var button_audio_decide<%= post.id %> = false;
 			// observer.observe(audio_<%= post.id %>, {
 			// 	attributes: true
 			// });
@@ -76,6 +86,7 @@
 					$('#post-edit-box-<%= @post.id %>').remove();
 				})
 			}
+
 			file_g<%= post.id %>.addEventListener('change', (event) => {
 				for(i = 0; i < file_g<%= post.id %>.files.length; i++){
 					file_name<%= post.id %>.textContent = file_g<%= post.id %>.files[i].name;
@@ -118,19 +129,33 @@
 			<% end %>
 
 			$('#button-audio-<%= post.id %>').click(function(){
-					if(number<%= post.id %>.value != '' && number<%= post.id %>.value > 0){
-
+				if(number<%= post.id %>.value != '' && number<%= post.id %>.value > 0){
+					if(button_audio_decide<%= post.id %> == false){
+						$('#button-audio-<%= post.id %>').css('display', 'none');
+						$('#button-pause-<%= post.id %>').css('display', 'block');
 						clearInterval(play_audio_timer<%= post.id %>);
-						play_audio<%= post.id %>(number<%= post.id %>.value); //play_audio開始！
-
-					}else{
-						clearInterval(play_audio_timer<%= post.id %>);
-						
-						audio_<%= post.id %>.src = "<%= post.audio.url.to_s %>";
-						
-						audio_<%= post.id %>.play();
+						play_audio<%= post.id %>(number<%= post.id %>.value); //play_audio開始！	
+						button_audio_decide<%= post.id %> = true;
 					}
+
+
+				}else{
+					clearInterval(play_audio_timer<%= post.id %>);
+					
+					audio_<%= post.id %>.src = "<%= post.audio.url.to_s %>";
+					
+					audio_<%= post.id %>.play();
+				}
 			});
+			$('#button-pause-<%= post.id %>').click(function(){
+				if(button_audio_decide<%= post.id %> = true){
+					clearInterval(play_audio_timer<%= post.id %>)
+					$('#button-audio-<%= post.id %>').css('display', 'block');
+					$('#button-pause-<%= post.id %>').css('display', 'none');
+					button_audio_decide<%= post.id %> = false;			
+				}
+
+			});	
 			function play_audio<%= post.id %>(time){
 				if(time > 0){
 						play_audio_timer<%= post.id %> = setInterval(function(){

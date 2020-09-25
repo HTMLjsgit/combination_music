@@ -21,9 +21,7 @@
     <header>
       <div class="top-box top-box-pc">
         <div class="contents-box">
-            <%= link_to posts_path do %>
-              <h1 class="toptext combinationmusic-top">CombinationMusic</h1>
-            <% end %>
+              <h1 class="toptext-mobile combinationmusic-top"><%= link_to "CombinationMusic", posts_path,class: "toptext combinationmusic-top" %></h1>
           <div class="nav-before-box">
             <nav class="top-nav">
               <% if user_signed_in? %>
@@ -46,11 +44,9 @@
         </div>
       </div>
       <div class="top-box-mobile top-box">
-        <div class="mobile-contents-box">
-            <%= link_to posts_path do %>
-              <h1 class="toptext-mobile combinationmusic-top">CombinationMusic</h1>
-            <% end %>
-
+          <div class="combination_music_top_box">
+                <h1 class="toptext-mobile combinationmusic-top"><%= link_to "CombinationMusic", posts_path, class: "combinationmusic-top toptext-mobile" %></h1>
+          </div>
             <nav class="mobile-top-nav">
               <% if user_signed_in? %>
                 <div class="cp_offcm01">
