@@ -94,6 +94,10 @@ p .post-title-form{
 	width: 100%;
 	max-width: 100%;
 }
+#audio-form-show{
+	height: 30px;
+	margin-bottom: 5px;
+}
 .combination_music_start_text{
 	font-size: 16px;
 }
@@ -113,6 +117,9 @@ p .post-title-form{
 	background-color: #078CFF;
 	color: #ffffff;
 	border-radius: 5px;
+}
+#audio-show-post{
+	height: 20px;
 }
 .post-box-post-submit-p .post-submit{
 	padding-left: 10px;
@@ -397,7 +404,7 @@ input[type="submit"]{
 	width: 300px;
 }
 .sounds-form-box{
-	margin-bottom: 19px;
+	margin-bottom: 5px;
 	margin-top: 5px;
 	margin-left: 15px;
 }
@@ -406,11 +413,11 @@ input[type="submit"]{
 }
 .files-box{
 	margin-left: 15px;
-	margin-bottom: 10px;
 }
 .post-audio{
 	margin-bottom: 5px;
 	margin-left: 15px;
+	font-size: 14px;
 }
 .post-contents-box{
 	text-align: center;
@@ -499,6 +506,9 @@ button:hover{
 	width: 100%;
 	max-width: 100%;
 }
+.file-button-demo.post-file-demo{
+	padding: 8px;
+}
 .file-button-demo{
 	border: 1px solid #000000;
 	margin-top: 5px;
@@ -506,6 +516,7 @@ button:hover{
 	background-color: #eeeeee;
 	cursor: pointer;
 	border-radius: 5px;
+	font-size: 15px;
 }
 .field-box-post{
 	width: 100%;
@@ -537,7 +548,7 @@ button:hover{
 	padding-right: 30px;
 }
 .file-button-demo{
-	padding: 5px;
+	padding: 2px;
 }
 .file-name-box{
 	width: 100%;
@@ -553,8 +564,8 @@ button:hover{
 	width: 100%;
 	max-width: 100%;
 	word-break: break-all;
-	margin-bottom: 20px;
-	margin-top: 20px;
+	margin-bottom: 10px;
+	margin-top: 10px;
 }
 @keyframes anim_go{
 	0%{

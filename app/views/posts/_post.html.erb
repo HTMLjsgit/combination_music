@@ -40,11 +40,14 @@
 						<%= f.check_box :sound, checked: post.sound, class: "sound-check-box" %>
 					</div>
 					<div class="files-box">
-						<%= f.file_field :audio, class: "post_audio_form_edit", id: "audio-edit-#{post.id}-form" %><br>
-						<span id="file_button-<%= post.id %>" class="file-button-demo">ファイルを選択</span><br>
+						<%= f.file_field :audio, class: "post_audio_form_edit", id: "audio-edit-#{post.id}-form" %>
+						<span id="file_button-<%= post.id %>" class="file-button-demo post-file-demo">ファイルを選択</span><br>
 					</div>
 					<div class="post-audio-name-box">
 						<p id="post-file-name-<%= post.id %>" class="post-audio"><%= post_audio(post) %></p>
+					</div>
+					<div class="post-show-audio-box">
+						<div id="post-show-form-post-box-please-<%= post.id %>"></div>
 					</div>
 					<div class="center-flex-box">
 						<p class="post-box-post-submit-p">
@@ -71,110 +74,139 @@
 
 	</style>
 	<script>
-
-			var edit_click<%= post.id %>  = false;
-			var file_g<%= post.id %> = $get_id("audio-edit-<%= post.id %>-form");
-			var file_name<%= post.id %> = $get_id("post-file-name-<%= post.id %>");
-			var number<%= post.id %> = $get_id("number-<%= post.id %>");
-			var audio_<%= post.id %> = $get_id("audio-<%= post.id %>");		
-			var volume<%= post.id %> = $get_id("volume-range-<%= post.id %>");
-			var play_audio_timer<%= post.id %>
-			var loop_check<%= post.id %> = $get_id("loop-check-<%= post.id %>");
-			var button_audio_pause<%= post.id %> = $get_id("button-audio-<%= post.id %>");
-			var button_audio_decide<%= post.id %> = false;
-			// observer.observe(audio_<%= post.id %>, {
-			// 	attributes: true
-			// });
-			if(audio_<%= post.id %> == null){
-				$.ajax({
-					url: `/posts/${<%= post.id %>}`,
-					type: "DELETE",
-					data: {'id': <%= post.id %>}
-				})
-				.done(function(data){
-					$('#post-edit-box-<%= @post.id %>').remove();
-				})
+		var edit_click<%= post.id %>  = false;
+		var file_g<%= post.id %> = $get_id("audio-edit-<%= post.id %>-form");
+		var file_name<%= post.id %> = $get_id("post-file-name-<%= post.id %>");
+		var number<%= post.id %> = $get_id("number-<%= post.id %>");
+		var audio_<%= post.id %> = $get_id("audio-<%= post.id %>");		
+		var volume<%= post.id %> = $get_id("volume-range-<%= post.id %>");
+		var play_audio_timer<%= post.id %>
+		var loop_check<%= post.id %> = $get_id("loop-check-<%= post.id %>");
+		var button_audio_pause<%= post.id %> = $get_id("button-audio-<%= post.id %>");
+		var button_audio_decide<%= post.id %> = false;
+		var file_name_tasikame;
+		var post_audio = $get_class("post-audio");
+		// observer.observe(audio_<%= post.id %>, {
+		// 	attributes: true
+		// });
+		for(var i = 0; i < post_audio.length; i++){
+			if(post_audio[i].textContent.length > 20){
+				post_audio[i].textContent = post_audio[i].textContent.slice(0, 100)+"...";
 			}
-
-			file_g<%= post.id %>.addEventListener('change', (event) => {
-				for(i = 0; i < file_g<%= post.id %>.files.length; i++){
-					file_name<%= post.id %>.textContent = file_g<%= post.id %>.files[i].name;
-				}
-			});
-
-			$("#button-edit-<%= post.id %>").click(function(){
-				if(edit_click<%= post.id %> == false){
-					$('#post-form-edit-<%= post.id %>').css('display', 'block');
-					$('#post-contents-box-<%= post.id %>').css('display', 'none');
-					edit_click<%= post.id %> = true;
-				}else if(edit_click<%= post.id %> == true){
-
-					$('#post-form-edit-<%= post.id %>').css('display', 'none');
-					$('#post-contents-box-<%= post.id %>').css('display', 'block');
-
-					edit_click<%= post.id %> = false;
-				}
-			});
-			if(loop_check<%= post.id %> != null){
-				loop_check<%= post.id %>.addEventListener('change', function(){
-					if(loop_check<%= post.id %>.checked){
-						audio_<%= post.id %>.loop = true;
-					}else{
-						audio_<%= post.id %>.loop = false;
-
-					}
-				});					
+		}
+		if(audio_<%= post.id %> == null){
+			$.ajax({
+				url: `/posts/${<%= post.id %>}`,
+				type: "DELETE",
+				data: {'id': <%= post.id %>}
+			})
+			.done(function(data){
+				$('#post-edit-box-<%= @post.id %>').remove();
+			})
+		}
+		file_name_tasikame = ["asf" , "asx" , "acd" ,"au" , "avi" , "aif" , "dig" , "iff" , "lso" , "mid" , "midi" , "mov" , "mp3" , "mpg" , "msf" ,"qt" ,"ram" ,"rm" ,"rpm" ,"sd" ,"sdn" ,"svx" ,"vqe" ,"vqf", "vql", "wav", "wma", "wrk"]
+		var file = $get_id("audio-file_field");
+		file_g<%= post.id %>.addEventListener('change', (event) => {
+			for(i = 0; i < file_g<%= post.id %>.files.length; i++){
+				var file_name_please = file_g<%= post.id %>.files[i].name;
 			}
+			file_name<%= post.id %>.textContent = file_name_please;
+				var render = new FileReader();
 
-			$('#file_button-<%= post.id %>').click(function(){
-				$('#audio-edit-<%= post.id %>-form').click();
-			});
-			<% if post.audio? %>
-				<% if post.sound %>
-					volume<%= post.id %>.addEventListener('input', function(){
-						audio_<%= post.id %>.volume = volume<%= post.id %>.value / 100
+				render.onload = function(e){
+
+					file_name_tasikame.forEach(function(value){
+						if(file_name_please.replace(/.+\./g, "").match(value)){
+							$("#audio-form-box-<%= post.id %>").attr("src", e.target.result);
+							$('#post-show-form-post-box-please-<%= post.id %>').html(`<div class='audio-form-box' id='audio-show-post-box'><audio id='audio-form-show' src='${e.target.result}' controls></audio></div>`);	
+							console.log("-----------fafwafwa");
+						}
 					});
-				<% end %>
-			<% end %>
-
-			$('#button-audio-<%= post.id %>').click(function(){
-				if(number<%= post.id %>.value != '' && number<%= post.id %>.value > 0){
-					if(button_audio_decide<%= post.id %> == false){
-						$('#button-audio-<%= post.id %>').css('display', 'none');
-						$('#button-pause-<%= post.id %>').css('display', 'block');
-						clearInterval(play_audio_timer<%= post.id %>);
-						play_audio<%= post.id %>(number<%= post.id %>.value); //play_audio開始！	
-						button_audio_decide<%= post.id %> = true;
-					}
-
-
-				}else{
-					clearInterval(play_audio_timer<%= post.id %>);
-					
-					audio_<%= post.id %>.src = "<%= post.audio.url.to_s %>";
-					
-					audio_<%= post.id %>.play();
 				}
-			});
-			$('#button-pause-<%= post.id %>').click(function(){
-				if(button_audio_decide<%= post.id %> = true){
-					clearInterval(play_audio_timer<%= post.id %>)
-					$('#button-audio-<%= post.id %>').css('display', 'block');
-					$('#button-pause-<%= post.id %>').css('display', 'none');
-					button_audio_decide<%= post.id %> = false;			
-				}
+				render.readAsDataURL(event.target.files[0])		
 
-			});	
-			function play_audio<%= post.id %>(time){
-				if(time > 0){
-						play_audio_timer<%= post.id %> = setInterval(function(){
-						//効果音の場合はjsからもう一度srcを設定しなければならない
-						audio_<%= post.id %>.src = "<%= post.audio.url %>";
-						audio_<%= post.id %>.play();
-					}, Number(time) * 1000);			
-				}
+		});
 
+		file_g<%= post.id %>.addEventListener('change', (event) => {
+			for(i = 0; i < file_g<%= post.id %>.files.length; i++){
+				file_name<%= post.id %>.textContent = file_g<%= post.id %>.files[i].name;
 			}
+		});
+
+		$("#button-edit-<%= post.id %>").click(function(){
+			if(edit_click<%= post.id %> == false){
+				$('#post-form-edit-<%= post.id %>').css('display', 'block');
+				$('#post-contents-box-<%= post.id %>').css('display', 'none');
+				edit_click<%= post.id %> = true;
+			}else if(edit_click<%= post.id %> == true){
+
+				$('#post-form-edit-<%= post.id %>').css('display', 'none');
+				$('#post-contents-box-<%= post.id %>').css('display', 'block');
+
+				edit_click<%= post.id %> = false;
+			}
+		});
+		if(loop_check<%= post.id %> != null){
+			loop_check<%= post.id %>.addEventListener('change', function(){
+				if(loop_check<%= post.id %>.checked){
+					audio_<%= post.id %>.loop = true;
+				}else{
+					audio_<%= post.id %>.loop = false;
+
+				}
+			});					
+		}
+
+		$('#file_button-<%= post.id %>').click(function(){
+			$('#audio-edit-<%= post.id %>-form').click();
+		});
+		<% if post.audio? %>
+			<% if post.sound %>
+				volume<%= post.id %>.addEventListener('input', function(){
+					audio_<%= post.id %>.volume = volume<%= post.id %>.value / 100
+				});
+			<% end %>
+		<% end %>
+
+		$('#button-audio-<%= post.id %>').click(function(){
+			if(number<%= post.id %>.value != '' && number<%= post.id %>.value > 0){
+				if(button_audio_decide<%= post.id %> == false){
+					$('#button-audio-<%= post.id %>').css('display', 'none');
+					$('#button-pause-<%= post.id %>').css('display', 'block');
+					clearInterval(play_audio_timer<%= post.id %>);
+					play_audio<%= post.id %>(number<%= post.id %>.value); //play_audio開始！	
+					button_audio_decide<%= post.id %> = true;
+				}
+
+
+			}else{
+				clearInterval(play_audio_timer<%= post.id %>);
+				
+				audio_<%= post.id %>.src = "<%= post.audio.url.to_s %>";
+				
+				audio_<%= post.id %>.play();
+			}
+		});
+		$('#button-pause-<%= post.id %>').click(function(){
+			if(button_audio_decide<%= post.id %> = true){
+				clearInterval(play_audio_timer<%= post.id %>)
+				$('#button-audio-<%= post.id %>').css('display', 'block');
+				$('#button-pause-<%= post.id %>').css('display', 'none');
+				button_audio_decide<%= post.id %> = false;			
+			}
+
+		});	
+
+		function play_audio<%= post.id %>(time){
+			if(time > 0){
+					play_audio_timer<%= post.id %> = setInterval(function(){
+					//効果音の場合はjsからもう一度srcを設定しなければならない
+					audio_<%= post.id %>.src = "<%= post.audio.url %>";
+					audio_<%= post.id %>.play();
+				}, Number(time) * 1000);			
+			}
+
+		}
 
 
 	</script>

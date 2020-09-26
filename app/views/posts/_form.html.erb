@@ -31,17 +31,13 @@
 <% end %>
 <script>
 
-  var url;
-  var audio_context;
-  var recorder;
-
 	$('#file_button').click(function(){
 		$('#audio-file_field').click();
 	});
 	$("voice_start_button").click(function(){
 		
 	});
-	file_name_tasikame = ["asf" , "asx" , "acd" ,"au" , "avi" , "aif" , "dig" , "iff" , "lso" , "mid" , "midi" , "mov" , "mp3" , "mpg" , "msf" ,"qt" ,"ram" ,"rm" ,"rpm" ,"sd" ,"sdn" ,"svx" ,"vqe" ,"vqf", "vql", "wav", "wma", "wrk"]
+	var file_name_tasikame = ["asf" , "asx" , "acd" ,"au" , "avi" , "aif" , "dig" , "iff" , "lso" , "mid" , "midi" , "mov" , "mp3" , "mpg" , "msf" ,"qt" ,"ram" ,"rm" ,"rpm" ,"sd" ,"sdn" ,"svx" ,"vqe" ,"vqf", "vql", "wav", "wma", "wrk"]
 	var file = $get_id("audio-file_field");
 	var file_name = $get_id("file_name");
 	file.addEventListener('change', (event) => {
