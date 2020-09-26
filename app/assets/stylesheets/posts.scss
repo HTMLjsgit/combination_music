@@ -69,8 +69,9 @@
 	padding-left: 5px;
 }
 p .post-title-form{
-	width: 100%;
+	width: 90%;
 	max-width: 100%;
+	margin-left: 15px;
 }
 .release_the_login{
 	text-align: center;
@@ -103,17 +104,22 @@ p .post-title-form{
 .post-submit{
 	font-weight: bold;
 	font-family: "Noto Sans JP", sans-serif;
-	padding-left: 80px;
-	padding-right: 80px;
-	padding-bottom: 3px;
+	padding-left: 50px;
+	padding-right: 50px;
+	padding-bottom: 5px;
 	padding-top: 3px;
 	text-align: center;
-	font-size: 16px;
+	font-size: 13px;
 	background-color: #078CFF;
 	color: #ffffff;
 	border-radius: 5px;
 }
-
+.post-box-post-submit-p .post-submit{
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
 .post-submit:hover{
     transition: background-color 0.3s ease;
     background-color: #4683B7;
@@ -382,23 +388,29 @@ input[type="submit"]{
 .title-form{
 	margin-top: 5px;
 	margin-bottom: 5px;
-	width: 500px;
+	width: 100%;
 	height: 25px;
 	font-family: "游ゴシック", sans-serif;
 	font-weight: bold;
 }
+.form-post-new{
+	width: 300px;
+}
 .sounds-form-box{
 	margin-bottom: 19px;
 	margin-top: 5px;
+	margin-left: 15px;
 }
 .space-box{
 	margin-top: 5px;
 }
 .files-box{
+	margin-left: 15px;
 	margin-bottom: 10px;
 }
 .post-audio{
 	margin-bottom: 5px;
+	margin-left: 15px;
 }
 .post-contents-box{
 	text-align: center;
@@ -483,6 +495,10 @@ button:hover{
 	height: 0;
 	width: 0;
 }
+.form-post-box{
+	width: 100%;
+	max-width: 100%;
+}
 .file-button-demo{
 	border: 1px solid #000000;
 	margin-top: 5px;
@@ -490,6 +506,10 @@ button:hover{
 	background-color: #eeeeee;
 	cursor: pointer;
 	border-radius: 5px;
+}
+.field-box-post{
+	width: 100%;
+	max-width: 100%;
 }
 .file-button-demo:hover{
 	background-color:#dddddd;
@@ -519,14 +539,23 @@ button:hover{
 .file-button-demo{
 	padding: 5px;
 }
+.file-name-box{
+	width: 100%;
+	max-width: 100%;
+	word-break: break-all;
+}
 #file_name{
 	text-align: center;
-	max-width: 100%;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+	margin-top: 20px;
 	margin-bottom: 20px;
 }
-
+.post-audio-name-box{
+	width: 100%;
+	max-width: 100%;
+	word-break: break-all;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
 @keyframes anim_go{
 	0%{
 		opacity: 0;
@@ -592,8 +621,6 @@ button:hover{
 	}
 
 	.files-box{
-		display: flex;
-		justify-content: center;
 	}
 	.explabox{
 		padding-right: 20px;

@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
 	<div class="form-box new-form">
-		<%= form_with model: @post, local: false do |f| %>
+		<%= form_with model: @post, local: false, class: "form-post-new" do |f| %>
 			<div class="post-form-errors-new">
 				<%= render partial: 'layouts/error', locals: {model: @post} %>
 			</div>
@@ -15,7 +15,9 @@
 				</p>
 			</div>
 			<span id="file_button" class="file-button-demo">ファイルを選択</span><br>
-			<p id="file_name"></p>
+			<div class="file-name-box">
+				<p id="file_name"></p>
+			</div>
 			<div class="audio-form-show-box">
 				<div class="audio-form-box"></div>
 			</div>

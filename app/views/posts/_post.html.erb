@@ -29,24 +29,33 @@
 		</div>
 		<div id="post-form-edit-<%= post.id %>" class="post-form-edit-box">
 			<div class="form-box">
-				<%= form_with model: post, local: false do |f| %>
-				<div class="errors-box" id="model-error-<%= post.id %>">
-					<%= render partial: 'layouts/error', locals: {model: post} %>
-				</div>
+				<%= form_with model: post, local: false, class: "form-post-box" do |f| %>
+					<div class="errors-box" id="model-error-<%= post.id %>">
+						<%= render partial: 'layouts/error', locals: {model: post} %>
+					</div>
 
-				<p><%= f.text_field :title, placeholder: "曲名を入力", class: "title-form post-title-form" %></p>
-				<div class="sounds-form-box">
-					<%= f.label "サウンドモードをON", class: "sound-label" %>
-					<%= f.check_box :sound, checked: post.sound, class: "sound-check-box" %>
-				</div>
-				<div class="files-box">
-					<%= f.file_field :audio, class: "post_audio_form_edit", id: "audio-edit-#{post.id}-form" %><br>
-					<span id="file_button-<%= post.id %>" class="file-button-demo">ファイルを選択</span><br>
-				</div>
-				<p id="post-file-name-<%= post.id %>" class="post-audio"><%= post_audio(post) %></p>
-					<%= f.submit "送信" %>
+					<p class="field-box-post"><%= f.text_field :title, placeholder: "曲名を入力", class: "title-form post-title-form" %></p>
+					<div class="sounds-form-box">
+						<%= f.label "サウンドモードをON", class: "sound-label" %>
+						<%= f.check_box :sound, checked: post.sound, class: "sound-check-box" %>
+					</div>
+					<div class="files-box">
+						<%= f.file_field :audio, class: "post_audio_form_edit", id: "audio-edit-#{post.id}-form" %><br>
+						<span id="file_button-<%= post.id %>" class="file-button-demo">ファイルを選択</span><br>
+					</div>
+					<div class="post-audio-name-box">
+						<p id="post-file-name-<%= post.id %>" class="post-audio"><%= post_audio(post) %></p>
+					</div>
+					<div class="center-flex-box">
+						<p class="post-box-post-submit-p">
+							<%= f.submit "送信する", class: "post-submit" %>
+						</p>
+					</div>
 				<% end %>
 			</div>
+		</div>
+		<div id="audio-form-show-box-<%= post.id %>">
+			<div class="audio-form-box-<%= post.id %>"></div>
 		</div>
 		<div class="kinds-edit-buttons-box">
 			<button id="button-edit-<%= post.id %>" class="edit-button edit-and-delete-box"><%= image_tag "edit.png" %>編集</button>
