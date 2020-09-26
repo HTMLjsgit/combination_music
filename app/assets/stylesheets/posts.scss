@@ -19,6 +19,9 @@
 	justify-content: center;
 	margin-top: 20px;
 }
+.file-button-demo.file-go-button-post{
+	padding: 5px;
+}
 
 .google-link{
 	text-decoration: none;
@@ -567,6 +570,9 @@ button:hover{
 	margin-bottom: 10px;
 	margin-top: 10px;
 }
+.index-posts-buttons{
+	font-size: 15px;
+}
 @keyframes anim_go{
 	0%{
 		opacity: 0;
@@ -621,6 +627,9 @@ button:hover{
 	.audios-box{
 		width: 100%;
 	}
+	.index-posts-buttons{
+		font-size: 10px;
+	}
 	.post-submit{
 		margin: 0 auto;
 		max-width: 100px;
@@ -630,7 +639,9 @@ button:hover{
 	}
 	.post-form-sound-box{
 	}
-
+	.file-button-form-post-new-go{
+		font-size: 12px;
+	}
 	.files-box{
 	}
 	.explabox{

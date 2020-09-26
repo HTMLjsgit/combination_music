@@ -1,7 +1,6 @@
 function move_scroll(id){
 	var speed = 500;
 	var position = $("#" + id).offset().top;
-	console.log(id);
 	$("html, body").animate({scrollTop: position}, speed, "swing");
 }
 

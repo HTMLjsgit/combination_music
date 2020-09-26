@@ -8,8 +8,9 @@
 	</div>
 
 	<div class="buttons-box-play-pause">
-		<button id="play-audios-button">すべて再生<%= image_tag "playback.png", class: "play-image" %></button><button id="pause-audios-button">すべて停止<%= image_tag "pause.png", class: "play-image" %></button>
-		<button class="all-minute-audio-reset-button">すべて秒数リセット</button>
+		<button id="play-audios-button" class="index-posts-buttons">すべて再生<%= image_tag "playback.png", class: "play-image" %></button>
+		<button id="pause-audios-button" class="index-posts-buttons">すべて停止<%= image_tag "pause.png", class: "play-image" %></button>
+		<button class="all-minute-audio-reset-button index-posts-buttons">すべて秒数リセット</button>
 	</div>
 	<div class="roop-box-post">
 		<p>すべてループさせる</p>
@@ -55,14 +56,15 @@
 				}
 			});	
 			loops.addEventListener('change', function(){
-				var audios = $get_class("audios");
+				var loops_posts = $get_class("loops-check-post");
+				console.log(loops_posts);
 				if(loops.checked){
-					for(i = 0; i < audios.length; i++){
-						audios[i].loop = true;
+					for(i = 0; i < loops_posts.length; i++){
+						loops_posts[i].checked = true;
 					}
 				}else{
-					for(i = 0; i < audios.length; i++){
-						audios[i].loop = false;
+					for(i = 0; i < loops_posts.length; i++){
+						loops_posts[i].checked = false;
 					}
 				}
 			});
@@ -100,7 +102,7 @@
 		<div class="files-box">
 			<input type="file" id="audio-file_field" class="file-choose-button">
 
-			<span id="file_button" class="file-button-demo">ファイルを選択</span><br>
+			<span id="file_button" class="file-button-demo file-go-button-post">ファイルを選択</span><br>
 			<div class="post-form-sound-box">
 				<p>サウンドモード</p>
 				<input type="checkbox" id="check-box-post" value="false">
@@ -122,8 +124,8 @@
 	</div>
 
 	<div class="buttons-box-play-pause">
-		<button id="play-audios-button">すべて再生<%= image_tag "playback.png" , class: "play-image"%></button>
-		<button id="pause-audios-button">すべて停止<%= image_tag "pause.png", class: "play-image" %></button>
+		<button id="play-audios-button" class="index-posts-buttons">すべて再生<%= image_tag "playback.png" , class: "play-image"%></button>
+		<button id="pause-audios-button" class="index-posts-buttons">すべて停止<%= image_tag "pause.png", class: "play-image" %></button>
 	</div>
 
 	<div class="posts-box">
