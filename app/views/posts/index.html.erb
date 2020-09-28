@@ -55,16 +55,25 @@
 					numbers[i].value = '';
 				}
 			});	
+
 			loops.addEventListener('change', function(){
 				var loops_posts = $get_class("loops-check-post");
+				var audios = $get_class("audios");
 				console.log(loops_posts);
 				if(loops.checked){
-					for(i = 0; i < loops_posts.length; i++){
+					for(var i = 0; i < loops_posts.length; i++){
 						loops_posts[i].checked = true;
 					}
+					for(var j = 0; i < audios.length; j++){
+						audios[j].loop = true;
+					}
 				}else{
-					for(i = 0; i < loops_posts.length; i++){
+					for(var i = 0; j < loops_posts.length; i++){
 						loops_posts[i].checked = false;
+
+					}
+					for(var j = 0; j < audios.length; j++){
+						audios[j].loop = true;
 					}
 				}
 			});

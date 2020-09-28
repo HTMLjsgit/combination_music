@@ -167,7 +167,12 @@
 				});
 			<% end %>
 		<% end %>
-
+		$(number<%= post.id %>).change(function(e){
+			if(button_audio_decide<%= post.id %> == true){
+				clearInterval(play_audio_timer<%= post.id %>);
+				play_audio<%= post.id %>(number<%= post.id %>.value);
+			}
+		});
 		$('#button-audio-<%= post.id %>').click(function(){
 			if(number<%= post.id %>.value != '' && number<%= post.id %>.value > 0){
 				if(button_audio_decide<%= post.id %> == false){
