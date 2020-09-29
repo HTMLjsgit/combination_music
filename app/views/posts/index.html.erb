@@ -51,7 +51,7 @@
 				for(var i = 0; i < audios.length; i++){
 					audios[i].currentTime = 0;
 				}
-				for(var i = 0; i < numbers.length; i++){
+				for(var j = 0; j < numbers.length; j++){
 					numbers[i].value = '';
 				}
 			});	
@@ -60,20 +60,23 @@
 				var loops_posts = $get_class("loops-check-post");
 				var audios = $get_class("audios");
 				console.log(loops_posts);
+				console.log(audios);
 				if(loops.checked){
 					for(var i = 0; i < loops_posts.length; i++){
 						loops_posts[i].checked = true;
-					}
-					for(var j = 0; i < audios.length; j++){
-						audios[j].loop = true;
-					}
-				}else{
-					for(var i = 0; j < loops_posts.length; i++){
-						loops_posts[i].checked = false;
 
 					}
 					for(var j = 0; j < audios.length; j++){
 						audios[j].loop = true;
+
+					}
+				}else{
+					for(var i = 0; i < loops_posts.length; i++){
+						loops_posts[i].checked = false;
+
+					}
+					for(var j = 0; j < audios.length; j++){
+						audios[j].loop = false;
 					}
 				}
 			});
@@ -88,8 +91,8 @@
 					audios[i].pause();
 
 				}
-				for(var i = 0; i < button_audios.length; i++){
-					button_pause[i].click();
+				for(var j = 0; j < button_audios.length; j++){
+					button_pause[j].click();
 				}
 			});
 
@@ -111,7 +114,7 @@
 		<div class="files-box">
 			<input type="file" id="audio-file_field" class="file-choose-button">
 
-			<span id="file_button" class="file-button-demo file-go-button-post">ファイルを選択</span><br>
+			<span id="file_button" class="file-button-demo file-go-button-post"><%= image_tag "bgmicon.png" %>ファイルを選択</span><br>
 			<div class="post-form-sound-box">
 				<p>サウンドモード</p>
 				<input type="checkbox" id="check-box-post" value="false">

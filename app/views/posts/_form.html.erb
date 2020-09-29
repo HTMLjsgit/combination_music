@@ -14,7 +14,7 @@
 					<%= f.check_box :sound, checked: false, class: "sound-check-label" %><br>
 				</p>
 			</div>
-			<span id="file_button" class="file-button-demo">ファイルを選択</span><br>
+			<span id="file_button" class="file-button-demo"><%= image_tag "bgmicon.png" %>ファイルを選択</span><br>
 			<div class="file-name-box">
 				<p id="file_name"></p>
 			</div>
@@ -22,7 +22,6 @@
 				<div class="audio-form-box"></div>
 			</div>
 			<p><%= f.file_field :audio, id: "audio-file_field", class: "file-choose-button" %></p>
-			<p><%= f.hidden_field :url, value: "", id: "audio_url" %></p>
 			<div class="center-flex-box">
 				<p><%= f.submit "送信する", class: "post-submit" %></p>
 			</div>

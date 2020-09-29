@@ -120,6 +120,8 @@ p .post-title-form{
 	background-color: #078CFF;
 	color: #ffffff;
 	border-radius: 5px;
+    box-shadow: 1px 1px 2px 0 #46494B;
+
 }
 #audio-show-post{
 	height: 20px;
@@ -510,7 +512,7 @@ button:hover{
 	max-width: 100%;
 }
 .file-button-demo.post-file-demo{
-	padding: 8px;
+	padding: 5px;
 }
 .file-button-demo{
 	border: 1px solid #000000;
@@ -520,6 +522,9 @@ button:hover{
 	cursor: pointer;
 	border-radius: 5px;
 	font-size: 15px;
+	box-shadow: 1px 1px 3px #000000;
+	display: flex;
+	width: 130px;
 }
 .field-box-post{
 	width: 100%;
@@ -551,7 +556,7 @@ button:hover{
 	padding-right: 30px;
 }
 .file-button-demo{
-	padding: 2px;
+	padding: 5px;
 }
 .file-name-box{
 	width: 100%;
@@ -560,7 +565,7 @@ button:hover{
 }
 #file_name{
 	text-align: center;
-	margin-top: 20px;
+	/*margin-top: 20px;*/
 	margin-bottom: 20px;
 	word-break: break-all;
 }
@@ -572,7 +577,18 @@ button:hover{
 	margin-top: 10px;
 }
 .index-posts-buttons{
-	font-size: 15px;
+	font-size: 14px;
+	background-color: #4DA96F;
+	color: #ffffff;
+	font-weight: bold;
+	border-radius: 5px;
+    box-shadow: 0.5px 0.5px 2px 0 #46494B;
+    outline: none;
+
+}
+.index-posts-buttons:hover{
+	background-color: #3B8757;
+	transition: 0.3s ease background-color;
 }
 @keyframes anim_go{
 	0%{
@@ -629,7 +645,7 @@ button:hover{
 		width: 100%;
 	}
 	.index-posts-buttons{
-		font-size: 10px;
+		font-size: 12px;
 	}
 	.post-submit{
 		margin: 0 auto;
