@@ -1,17 +1,15 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, placeholder: "名前" %>
+  <div class="field name_field">
+    <h3 class="name-text"><%= f.label :name %></h3>
+    <%= f.text_field :name, placeholder: "名前", class: "file_name_user" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "更新" %>
+  <div class="actions-button">
+    <%= f.submit "名前を更新", class: "update-user-button" %>
   </div>
 <% end %>
 
-<p><%= button_to "アカウントを削除", registration_path(resource_name), data: { confirm: "本当に削除してもよろしいですか？" }, method: :delete %></p>
+<div class="account-delete-box"><%= button_to "アカウントを削除", registration_path(resource_name), data: { confirm: "本当に削除してもよろしいですか？" }, method: :delete , class: "account-delete-button"%></div>
 
