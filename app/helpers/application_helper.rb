@@ -16,7 +16,7 @@ module ApplicationHelper
 				title: "Conbination music | 音楽を組み合わせてみよう",
 				description: "Combination musicを使えば簡単に音楽や効果音を組み合わせることができます。\n音楽や効果音を組み合わせて、理想の音楽を実現しましょう。",
 				type: 'website',
-				image: image_url('favicon.ico'),
+				image: image_url('C.png'),
 				locale: 'ja_JP',
 			},
 			twitter: {
