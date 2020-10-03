@@ -94,16 +94,6 @@
 				post_audio[i].textContent = post_audio[i].textContent.slice(0, 100)+"...";
 			}
 		}
-		if(audio_<%= post.id %> == null){
-			$.ajax({
-				url: `/posts/${<%= post.id %>}`,
-				type: "DELETE",
-				data: {'id': <%= post.id %>}
-			})
-			.done(function(data){
-				$('#post-edit-box-<%= @post.id %>').remove();
-			})
-		}
 		file_name_tasikame = ["asf" , "asx" , "acd" ,"au" , "avi" , "aif" , "dig" , "iff" , "lso" , "mid" , "midi" , "mov" , "mp3" , "mpg" , "msf" ,"qt" ,"ram" ,"rm" ,"rpm" ,"sd" ,"sdn" ,"svx" ,"vqe" ,"vqf", "vql", "wav", "wma", "wrk"]
 		var file = $get_id("audio-file_field");
 		file_g<%= post.id %>.addEventListener('change', (event) => {

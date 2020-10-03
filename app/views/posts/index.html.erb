@@ -11,6 +11,7 @@
 		<button id="play-audios-button" class="index-posts-buttons">すべて再生<%= image_tag "playback.png", class: "play-image" %></button>
 		<button id="pause-audios-button" class="index-posts-buttons">すべて停止<%= image_tag "pause.png", class: "play-image" %></button>
 		<button class="all-minute-audio-reset-button index-posts-buttons">すべて秒数リセット</button>
+		<%= button_to "すべて削除", posts_destroy_path, method: :delete, remote: true, class: "index-posts-buttons", id: "delete-button-all" %>
 	</div>
 	<div class="roop-box-post">
 		<p>すべてループさせる</p>
@@ -33,6 +34,16 @@
 		$(function(){
 			var range = $get_id("whole-volume");
 			var loops = $get_id("loops-check");
+			var audios = $get_class("audios");
+			if(audios[0] == null){
+				$.ajax({
+					url: `/posts/destroy_all`,
+					type: "DELETE"
+				})
+				.done(function(data){
+					$('#post-edit-box-<%= @post.id %>').remove();
+				})
+			}
 			$('#play-audios-button').click(function(){
 				var audios = $get_class("audios");
 				var buttons_audios = $get_class("button-audios");

@@ -10,7 +10,6 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
-
   def create
 
   	@post = Post.new(create_params)
@@ -28,6 +27,12 @@ class PostsController < ApplicationController
    	else
   		render 'error-update.js.erb'
    	end
+  end
+
+  def destroy_all
+  	@user = current_user
+  	@user.posts.destroy_all
+  	render 'destory_all.js.erb'
   end
 
   def destroy
