@@ -41,7 +41,7 @@
 					</div>
 					<div class="files-box">
 						<%= f.file_field :audio, class: "post_audio_form_edit", id: "audio-edit-#{post.id}-form" %>
-						<span id="file_button-<%= post.id %>" class="file-button-demo post-file-demo"><%= image_tag "bgmicon.png" %>ファイルを選択</span><br>
+						<span id="file_button-<%= post.id %>" class="file-button-demo post-file-demo"><%= image_tag "bgmicon.png" %><p class="file-choose-text">ファイルを選択</p></span><br>
 					</div>
 					<div class="post-audio-name-box">
 						<p id="post-file-name-<%= post.id %>" class="post-audio"><%= post_audio(post) %></p>

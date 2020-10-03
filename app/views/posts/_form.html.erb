@@ -4,17 +4,18 @@
 			<div class="post-form-errors-new">
 				<%= render partial: 'layouts/error', locals: {model: @post} %>
 			</div>
-				<br>
-				<p>
-					<%= f.text_field :title, placeholder: "曲名を入力", class: "title-form" %>
-				</p>
+			<br>
+			<p>
+				<%= f.text_field :title, placeholder: "曲名を入力", class: "title-form" %>
+			</p>
+
 			<div class="center-flex-box">
 				<p class="sound-mode">
 					<%= f.label "サウンドモードをON", class: "sound-label" %>
 					<%= f.check_box :sound, checked: false, class: "sound-check-label" %><br>
 				</p>
 			</div>
-			<span id="file_button" class="file-button-demo"><%= image_tag "bgmicon.png" %>ファイルを選択</span><br>
+			<span id="file_button" class="file-button-demo"><%= image_tag "bgmicon.png", class: "bgmicon" %><p class="file-choose-text">ファイル選択</p></span><br>
 			<div class="file-name-box">
 				<p id="file_name"></p>
 			</div>

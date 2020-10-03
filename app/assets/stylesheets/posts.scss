@@ -22,6 +22,7 @@
 	display: flex;
 	justify-content: center;
 }
+
 .account-delete-button{
 	font-size: 15px;
 }
@@ -58,7 +59,6 @@
 	margin-top: 20px;
 }
 .file-button-demo.file-go-button-post{
-	padding: 5px;
 }
 
 .google-link{
@@ -538,7 +538,7 @@ button:hover{
 	margin-right: 20px;
 }
 #file_button{
-	margin-right: 30px;
+	margin-right: 20px;
 }
 .file-choose-button{
 	visibility: hidden;
@@ -550,26 +550,27 @@ button:hover{
 	max-width: 100%;
 }
 .file-button-demo.post-file-demo{
-	padding: 5px;
 }
 .file-button-demo{
-	border: 1px solid #000000;
+	border: 1px dashed #000000;
 	margin-top: 5px;
 	margin-bottom: 5px;
-	background-color: #eeeeee;
 	cursor: pointer;
 	border-radius: 5px;
 	font-size: 15px;
-	box-shadow: 1px 1px 3px #000000;
 	display: flex;
-	width: 130px;
+	width: 100%;
+	padding: 5px;
+	justify-content: center;
+}
+.file-choose-text{
+	padding-top: 5px;
 }
 .field-box-post{
 	width: 100%;
 	max-width: 100%;
 }
 .file-button-demo:hover{
-	background-color:#dddddd;
 }
 .post-edit-box{
 	margin-top: 10px;
@@ -587,14 +588,13 @@ button:hover{
 .post-form-sound-box{
 	display: flex;
 	padding-top: 10px;
-
+	width: 250px;
 }
 .files-box{
 	display: flex;
 	padding-right: 30px;
 }
 .file-button-demo{
-	padding: 5px;
 }
 .file-name-box{
 	width: 100%;

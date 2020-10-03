@@ -114,7 +114,7 @@
 		<div class="files-box">
 			<input type="file" id="audio-file_field" class="file-choose-button">
 
-			<span id="file_button" class="file-button-demo file-go-button-post"><%= image_tag "bgmicon.png" %>ファイルを選択</span><br>
+			<span id="file_button" class="file-button-demo file-go-button-post"><%= image_tag "bgmicon.png" %><p class="file-choose-text">ファイルを選択</p></span><br>
 			<div class="post-form-sound-box">
 				<p>サウンドモード</p>
 				<input type="checkbox" id="check-box-post" value="false">
@@ -277,6 +277,9 @@
 			max-width: 300px;
 			text-align: center;
 		}
+		.post-submit{
+			margin-top: 10px;
+		}
 		.audios-box{
 			border: 1px solid #000000;
 			border-radius: 5px;
@@ -305,6 +308,9 @@
 		}
 		.post-box{
 			display: block;
+		}
+		.post-form-sound-box{
+			margin-top: 5px;
 		}
 		@media screen and (max-width: 480px){
 			.button-audios{
