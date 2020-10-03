@@ -15,7 +15,9 @@
 					<%= f.check_box :sound, checked: false, class: "sound-check-label" %><br>
 				</p>
 			</div>
-			<span id="file_button" class="file-button-demo"><%= image_tag "bgmicon.png", class: "bgmicon" %><p class="file-choose-text">ファイル選択</p></span><br>
+			<div class="file-form-box">
+				<span id="file_button" class="file-button-demo file-form"><%= image_tag "bgmicon.png", class: "bgmicon" %><p class="file-choose-text">ファイル選択</p></span><br>
+			</div>
 			<div class="file-name-box">
 				<p id="file_name"></p>
 			</div>
@@ -28,35 +30,38 @@
 			</div>
 		<% end %>
 	</div>
-<% end %>
-<script>
+	<style>
 
-	$('#file_button').click(function(){
-		$('#audio-file_field').click();
-	});
-	$("voice_start_button").click(function(){
-		
-	});
-	var file_name_tasikame = ["asf" , "asx" , "acd" ,"au" , "avi" , "aif" , "dig" , "iff" , "lso" , "mid" , "midi" , "mov" , "mp3" , "mpg" , "msf" ,"qt" ,"ram" ,"rm" ,"rpm" ,"sd" ,"sdn" ,"svx" ,"vqe" ,"vqf", "vql", "wav", "wma", "wrk"]
-	var file = $get_id("audio-file_field");
-	var file_name = $get_id("file_name");
-	file.addEventListener('change', (event) => {
-		for(i = 0; i < file.files.length; i++){
-			var file_name_please = file.files[i].name;
-		}
-		file_name.textContent = file_name_please;
-			var render = new FileReader();
+	</style>
+	<script>
 
-			render.onload = function(e){
-				file_name_tasikame.forEach(function(value){
-					if(file_name_please.replace(/.+\./g, "").match(value)){
-						$("#audio-form-show").attr("src", e.target.result);
-						$('.audio-form-box').html(`<div class='audio-form-box' id='audio-form-box-id'><audio src='${e.target.result}' controls></audio></div>`);	
-					}
-				});
+		$('#file_button').click(function(){
+			$('#audio-file_field').click();
+		});
+		$("voice_start_button").click(function(){
+			
+		});
+		var file_name_tasikame = ["asf" , "asx" , "acd" ,"au" , "avi" , "aif" , "dig" , "iff" , "lso" , "mid" , "midi" , "mov" , "mp3" , "mpg" , "msf" ,"qt" ,"ram" ,"rm" ,"rpm" ,"sd" ,"sdn" ,"svx" ,"vqe" ,"vqf", "vql", "wav", "wma", "wrk"]
+		var file = $get_id("audio-file_field");
+		var file_name = $get_id("file_name");
+		file.addEventListener('change', (event) => {
+			for(i = 0; i < file.files.length; i++){
+				var file_name_please = file.files[i].name;
 			}
-			render.readAsDataURL(event.target.files[0])		
+			file_name.textContent = file_name_please;
+				var render = new FileReader();
 
-	});
+				render.onload = function(e){
+					file_name_tasikame.forEach(function(value){
+						if(file_name_please.replace(/.+\./g, "").match(value)){
+							$("#audio-form-show").attr("src", e.target.result);
+							$('.audio-form-box').html(`<div class='audio-form-box' id='audio-form-box-id'><audio src='${e.target.result}' controls></audio></div>`);	
+						}
+					});
+				}
+				render.readAsDataURL(event.target.files[0])		
 
- </script>
+		});
+
+	 </script>
+<% end %>

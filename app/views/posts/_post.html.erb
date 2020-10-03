@@ -44,7 +44,7 @@
 						<span id="file_button-<%= post.id %>" class="file-button-demo post-file-demo"><%= image_tag "bgmicon.png" %><p class="file-choose-text">ファイルを選択</p></span><br>
 					</div>
 					<div class="post-audio-name-box">
-						<p id="post-file-name-<%= post.id %>" class="post-audio"><%= post_audio(post) %></p>
+						<p id="post-file-name-<%= post.id %>" class="post-audio"><%=  post_audio(post).truncate(100) %></p>
 					</div>
 					<div class="post-show-audio-box">
 						<div id="post-show-form-post-box-please-<%= post.id %>"></div>
