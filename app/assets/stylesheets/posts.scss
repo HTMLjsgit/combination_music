@@ -13,8 +13,9 @@
 	margin-bottom: 20px;
 }
 .account-delete-box{
-	text-align: center;
 	margin-top: 20px;
+	justify-content: center;
+	display: flex;
 }
 .actions-button{
 	margin-top: 20px;
@@ -25,6 +26,17 @@
 
 .account-delete-button{
 	font-size: 15px;
+	padding: 5px;
+    border-radius: 5px;
+    color: #ffffff;
+    font-weight: bold;
+    display: flex;
+    box-shadow: 2px 2px 3px #dddddd;
+    background-color: #DE2634;
+}
+.account-delete-button:hover{
+	background-color: #BB2530;
+	transition: 0.3s ease background-color;
 }
 .update-user-button{
 	font-size: 15px;
@@ -35,6 +47,10 @@
     display: flex;
     box-shadow: 2px 2px 3px #dddddd;
     background-color: #4299C5;
+}
+.update-user-button:hover{
+	background-color: #307293;
+	transition: 0.3s ease background-color;
 }
 .name-text{
 	margin-top: 5px;
